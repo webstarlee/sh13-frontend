@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 export const routes = createBrowserRouter([
   {
@@ -10,8 +10,9 @@ export const routes = createBrowserRouter([
       };
     },
     children: [
+      { element: <Navigate to="/home" />, index: true },
       {
-        index: true,
+        path: "home",
         async lazy() {
           let { Home } = await import("pages/Home");
           return {
@@ -30,6 +31,7 @@ export const routes = createBrowserRouter([
       };
     },
     children: [
+      { element: <Navigate to="/auth/login" />, index: true },
       {
         path: "login",
         async lazy() {
