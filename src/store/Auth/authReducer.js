@@ -1,4 +1,4 @@
-import types from "./authActionTypes";
+import types from "./authTypes";
 
 const INITIAL_STATE = {
   currentUser: null,
@@ -26,6 +26,11 @@ const authReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: null,
+      };
+    case types.GET_USER_SUCCESS:
+      return {
+        ...state,
+        currentUser: action.payload.data,
       };
     default:
       return state;

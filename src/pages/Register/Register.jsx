@@ -40,25 +40,48 @@ export default function Register() {
   useEffect(() => {
     if (error) {
       const err = Object.values(error)[0];
-      dispatch(openToast({ title: "Error", type: "error", comment: err }));
+      dispatch(
+        openToast({ IsOpen: true, title: "Error", type: "error", comment: err })
+      );
       dispatch(clearError());
     }
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   const handleClick = () => {
-    if(!credentials.username) {
-      dispatch(openToast({ title: "Error", type: "error", comment: "Username field is required" }));
+    if (!credentials.username) {
+      dispatch(
+        openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "Username field is required",
+        })
+      );
       return;
     }
-    if(!credentials.userId) {
-      dispatch(openToast({ title: "Error", type: "error", comment: "User Id field is required" }));
+    if (!credentials.userId) {
+      dispatch(
+        openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "User Id field is required",
+        })
+      );
       return;
     }
-    if(credentials.password !== credentials.creconfirmPassword) {
-      dispatch(openToast({ title: "Error", type: "error", comment: "Password must match" }));
+    if (credentials.password !== credentials.confirmPassword) {
+      dispatch(
+        openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "Password must match----",
+        })
+      );
       return;
-    } 
+    }
     dispatch(registerStart(credentials));
   };
   const handleLinkButton = () => {

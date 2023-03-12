@@ -5,17 +5,17 @@ import { Box, Typography } from "@mui/material";
 import GppMaybeOutlinedIcon from "@mui/icons-material/GppMaybeOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
-import { closeToast } from "store/Layout/layoutActions";
+import { openToast } from "store/Layout/layoutActions";
 
 const useStyles = () => ({
   toastRoot: {
     position: "fixed",
-    top: "3.25rem",
+    top: "1rem",
     paddingTop: "1rem",
     width: "21.875rem",
-    right: "0",
+    right: "1rem",
     paddingRight: "1rem",
-    fontFamily: "chakra"
+    fontFamily: "chakra",
   },
   toast: {
     width: "350px",
@@ -59,7 +59,7 @@ export default function CustomizedSnackbars() {
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    dispatch(closeToast());
+    dispatch(openToast({ IsOpen: false }));
   };
   return (
     <Snackbar

@@ -1,13 +1,15 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, Navigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import { useTheme } from '@mui/material/styles';
-import Header from './Header';
+import { useTheme } from "@mui/material/styles";
+import Header from "./Header";
 import Sidebar from "./Sidebar";
+import { getUserInfo } from "store/Auth/authActions";
 
 const useStyles = () => {
   const theme = useTheme();
-  return ({
+  return {
     root: {
       boxShadow: "none",
       backgroundImage: "unset",
@@ -26,20 +28,24 @@ const useStyles = () => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-    }
-  })
+    },
+  };
 };
 
 function DashboardLayout() {
-
   const classes = useStyles();
   const [extended, setExtended] = useState(true);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.currentUser);
+  useEffect(() => {
+    dispatch(getUserInfo());
+  }, []);
 
   const handleExtended = () => {
     setExtended(!extended);
   };
 
-  const accessToken = window.sessionStorage.getItem('access_token');
+  const accessToken = window.sessionStorage.getItem("access_token");
   if (!accessToken) {
     return <Navigate to="/auth" replace />;
   }
@@ -47,7 +53,10 @@ function DashboardLayout() {
     <Fragment>
       <Header sidebarHandle={handleExtended} />
       <Sidebar extended={extended} />
-      <Box component="div" sx={[classes.content, extended && classes.fullContent]}>
+      <Box
+        component="div"
+        sx={[classes.content, extended && classes.fullContent]}
+      >
         <Outlet />
       </Box>
     </Fragment>
