@@ -1,4 +1,4 @@
-import types from './authTypes';
+import types from "./authActionTypes";
 
 const INITIAL_STATE = {
   currentUser: null,
@@ -8,6 +8,7 @@ const INITIAL_STATE = {
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case types.LOG_IN_SUCCESS:
+      window.sessionStorage.setItem("access_token", action.payload.token);
       return {
         ...state,
         currentUser: action.payload,
@@ -17,10 +18,15 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case types.REGISTER_FAILURE:
       return {
         ...state,
-        error: action.payload,
+        error: action.payload.response.data,
       };
     case types.LOG_OUT:
       return INITIAL_STATE;
+    case types.CLEAR_ERROR:
+      return {
+        ...state,
+        erorr: null,
+      };
     default:
       return state;
   }

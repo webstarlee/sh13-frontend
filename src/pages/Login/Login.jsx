@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { NotificationManager } from 'react-notifications';
 import { Typography, Link } from "@mui/material";
 import { SHInput, SHDivider, SHButton, SHCard } from "components";
+import { logInStart, clearError } from 'store/Auth/authActions';
 
 const useStyles = () => ({
   root: {
@@ -13,8 +16,30 @@ const useStyles = () => ({
 
 export default function Login() {
 
-  const navigate = useNavigate();
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const error = useSelector((state) => state.auth.error);
+  const [credentials, setCredentials] = useState({ userId: '', password: '' });
+  const handleChange = (e) => setCredentials({ ...credentials, [e.target.name]: e.target.value });
+
+  useEffect(() => {
+    if (currentUser && currentUser.user) {
+      navigate('/home');
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (error) {
+      NotificationManager.error(Object.values(error)[0]);
+      dispatch(clearError())
+    }
+  }, [error]);
+
+  const handleClick = () => {
+    dispatch(logInStart(credentials));
+  };
 
   const handleLinkButton = () => {
     navigate("/auth/register");
@@ -28,9 +53,12 @@ export default function Login() {
       <SHInput
         size="small"
         fullWidth={true}
-        label="Username"
+        label="UserId"
         id="username"
         color="secondary"
+        name="userId"
+        value={credentials.userId}
+        onChange={handleChange}
       />
       <SHDivider />
       <SHInput
@@ -40,6 +68,9 @@ export default function Login() {
         id="password"
         color="secondary"
         type="password"
+        name="password"
+        value={credentials.password}
+        onChange={handleChange}
       />
       <SHDivider height="large" />
       <SHButton
@@ -47,6 +78,7 @@ export default function Login() {
         size="large"
         fullWidth={true}
         title="Sign In"
+        onClick={handleClick}
       />
       <SHDivider height="medium" />
       <Typography variant="body2" align="center">

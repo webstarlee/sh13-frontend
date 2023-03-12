@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import {
   AppBar,
@@ -20,6 +22,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { logOut } from 'store/Auth/authActions';
 
 const useStyles = () => {
   const theme = useTheme();
@@ -212,6 +215,8 @@ const useStyles = () => {
 export default function Header(props) {
   const {sidebarHandle} = props;
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -220,6 +225,12 @@ export default function Header(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logout = () => {
+    dispatch(logOut());
+    window.sessionStorage.clear();
+    navigate("/");
   };
 
   return (
@@ -360,7 +371,7 @@ export default function Header(props) {
             </ListItemIcon>
           </MenuItem>
           <Divider />
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={logout}>
             Sign out
             <ListItemIcon sx={{justifyContent: 'flex-end'}}>
               <Logout color="primary" fontSize="small" />

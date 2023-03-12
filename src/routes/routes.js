@@ -23,6 +23,15 @@ export const routes = createBrowserRouter([
           };
         },
       },
+      {
+        path: "test",
+        async lazy() {
+          let { Test } = await import("pages/Test");
+          return {
+            Component: Test,
+          };
+        },
+      },
     ],
   },
   {
