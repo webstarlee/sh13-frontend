@@ -20,7 +20,6 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { logOut } from 'store/Auth/authActions';
 
@@ -186,19 +185,19 @@ const useStyles = () => {
       borderRadius: "0px",
       filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
       mt: 1.5,
-      border: "1px solid rgba(255,255,255,.15)",
+      border: `1px solid ${theme.palette.secondary.light}`,
       minWidth: "160px",
       "& .MuiMenuItem-root": {
         fontFamily: "chakra_medium",
-        color: "rgba(255,255,255,.5)",
+        color: theme.palette.secondary.lightBold,
         textTransform: "uppercase",
         fontSize: "11px",
         letterSpacing: "0.15em",
         justifyContent: "space-between",
         "&:hover": {
-          color: "#fff",
+          color: theme.palette.common.white,
           "& .MuiListItemIcon-root>svg": {
-            color: "#fff"
+            color: theme.palette.common.white,
           }
         }
       },

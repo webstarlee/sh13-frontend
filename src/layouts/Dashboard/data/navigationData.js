@@ -1,9 +1,7 @@
 import {
   Dashboard,
   PeopleAlt,
-  MenuBook,
   ImportContacts,
-  PostAdd,
 } from "@mui/icons-material";
 
 export const mainNavigation = [
@@ -19,12 +17,12 @@ export const mainNavigation = [
     navigationData: [
       {
         name: "All Posts",
-        icon: MenuBook,
+        icon: false,
         url: `/posts/all`,
       },
       {
         name: "Editor",
-        icon: PostAdd,
+        icon: false,
         url: `/posts/editor`,
       },
     ],

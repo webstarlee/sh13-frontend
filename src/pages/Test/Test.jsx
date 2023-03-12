@@ -2,13 +2,8 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-import { Box, Icon } from "@mui/material";
+import { Box } from "@mui/material";
 import GppMaybeIcon from '@mui/icons-material/GppMaybe';
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 
 const useStyles = () => ({
   

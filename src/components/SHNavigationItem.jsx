@@ -17,7 +17,7 @@ const useStyles = () => {
   const theme = useTheme();
   return ({
     root: {
-      width: "95%",
+      width: "100%",
       margin: "4px auto",
       borderRadius: "8px",
       transition: "all .5s",
@@ -25,21 +25,52 @@ const useStyles = () => {
     },
     listItem: {
       transition: "all .5s",
+      padding: '0.3rem 1rem',
       display: "flex",
       flexDirection: "column",
+      cursor: 'pointer',
+      "& .MuiTypography-root": {
+        fontSize: "14px",
+      },
+      "& :hover" : {
+        color: theme.palette.common.white,
+      }
+    },
+    listText: {
+      flex: "1",
+      fontSize: "14px"
     },
     listLink: {
-      padding: "0 15px",
+      padding: "0 7px",
       textDecoration: "none",
-      color: "inherit",
       transition: "all .5s",
       display: "flex",
       alignItems: "center",
       width: "100%",
+      position: 'relative',
+      color: theme.palette.secondary.lightBold,
+      justifyContent: 'flex-end',
     },
     listIcon: {
       color: "inherit",
       justifyContent: "center",
+      minWidth: "0px",
+      marginRight: '1.3rem',
+      "& > svg": {
+        fontSize: "1.25rem"
+      }
+    },
+    listIconActive: {
+      color: theme.palette.primary.main,
+      justifyContent: "center",
+      minWidth: "0px",
+      marginRight: '1.3rem',
+      "& > svg": {
+        fontSize: "1.25rem"
+      }
+    },
+    hiddenStyle: {
+      marginLeft: "20px",
     },
     listItemText: {
       [theme.breakpoints.up("sm")]: {
@@ -73,15 +104,14 @@ const NavigationItem = ({ item, collapsed }) => {
       setOpen(true);
     }
   }, [pathname, item.url]);
-
   return (
     <div
       className={clsx(
         classes.root,
         nested && open && classes.expanded,
         pathname.search(new RegExp(item.url, "g")) !== -1 &&
-          !nested &&
-          classes.selected
+        !nested &&
+        classes.selected
       )}>
       <ListItem
         sx={classes.listItem}
@@ -93,37 +123,47 @@ const NavigationItem = ({ item, collapsed }) => {
           sx={[
             classes.listLink
           ]}>
-          <ListItemIcon sx={classes.listIcon}>
+          <ListItemIcon sx={ nested && open ? classes.listIconActive: classes.listIcon }>
             {(item.icon && <item.icon />) || ""}
           </ListItemIcon>
-          <ListItemText>
-            {item.name}
-          </ListItemText>
+          {
+            !item.icon ?
+              <ListItemText sx={classes.hiddenStyle}>
+                {item.name}
+              </ListItemText>
+              : <ListItemText sx={classes.listText}>
+                {item.name}
+              </ListItemText>
+          }
+
+
           {nested &&
             (open ? (
-              <ExpandLess fontSize={"default"} />
+              <ExpandLess fontSize={"default"} sx={classes.expand} />
             ) : (
               <ExpandMore fontSize={"default"} />
             ))}
         </Box>
       </ListItem>
 
-      {nested && (
-        <Collapse in={open} timeout='auto' unmountOnExit>
-          <List disablePadding>
-            {item.navigationData.map((nestedItem, i) => {
-              return (
-                <NavigationItem
-                  key={i}
-                  item={nestedItem}
-                  collapsed={collapsed}
-                />
-              );
-            })}
-          </List>
-        </Collapse>
-      )}
-    </div>
+      {
+        nested && (
+          <Collapse in={open} timeout='auto' unmountOnExit>
+            <List disablePadding>
+              {item.navigationData.map((nestedItem, i) => {
+                return (
+                  <NavigationItem
+                    key={i}
+                    item={nestedItem}
+                    collapsed={collapsed}
+                  />
+                );
+              })}
+            </List>
+          </Collapse>
+        )
+      }
+    </div >
   );
 };
 

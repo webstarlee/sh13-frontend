@@ -8,7 +8,9 @@ export const palette = {
         main: "#3cd2a5"
     },
     secondary: {
-        main: "rgba(255,255,255,.3)"
+        light: "rgba(255,255,255,.15)",
+        main: "rgba(255,255,255,.3)",
+        lightBold: "rgba(255,255,255,.5)"
     },
     appbar: {
         main: "rgba(29,40,53,.95)"
