@@ -27,6 +27,7 @@ const useStyles = () => {
     appBar: {
       boxShadow: "none",
       backgroundImage: "unset",
+      zIndex: 1201
     },
     toolBar: {
       minHeight: "52px",
@@ -209,6 +210,7 @@ const useStyles = () => {
 };
 
 export default function Header(props) {
+  const {sidebarHandle} = props;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -222,7 +224,7 @@ export default function Header(props) {
 
   return (
     <AppBar
-      position="static"
+      position="fixed"
       color="appbar"
       enableColorOnDark={true}
       sx={classes.appBar}
@@ -234,6 +236,7 @@ export default function Header(props) {
           color="inherit"
           aria-label="menu"
           sx={classes.sidebarToggleBtn}
+          onClick={sidebarHandle}
         >
           <Divider component="span" light={true} sx={classes.hamburger} />
         </IconButton>
@@ -281,7 +284,7 @@ export default function Header(props) {
           </Fade>
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
-        <Box sx={{ display: { xs: "none", md: "block" } }}>
+        <Box>
           <Fade
             in={true}
             {...{ timeout: 500 }}
