@@ -244,28 +244,28 @@ export default function Header(props) {
           <Fade
             in={true}
             {...{ timeout: 500 }}
-            style={{ transitionDelay: "1400ms" }}
+            style={{ transitionDelay: "500ms" }}
           >
             <Typography variant="h6" sx={{fontFamily: "chakra_bold"}}>SH13</Typography>
           </Fade>
           <Fade
             in={true}
             {...{ timeout: 500 }}
-            style={{ transitionDelay: "500ms" }}
+            style={{ transitionDelay: "100ms" }}
           >
             <Typography component="div" sx={classes.ArrowTopLeft}></Typography>
           </Fade>
           <Fade
             in={true}
             {...{ timeout: 500 }}
-            style={{ transitionDelay: "700ms" }}
+            style={{ transitionDelay: "200ms" }}
           >
             <Typography component="div" sx={classes.ArrowTopRight}></Typography>
           </Fade>
           <Fade
             in={true}
             {...{ timeout: 500 }}
-            style={{ transitionDelay: "900ms" }}
+            style={{ transitionDelay: "300ms" }}
           >
             <Typography
               component="div"
@@ -275,7 +275,7 @@ export default function Header(props) {
           <Fade
             in={true}
             {...{ timeout: 500 }}
-            style={{ transitionDelay: "1100ms" }}
+            style={{ transitionDelay: "400ms" }}
           >
             <Typography
               component="div"
@@ -288,7 +288,7 @@ export default function Header(props) {
           <Fade
             in={true}
             {...{ timeout: 500 }}
-            style={{ transitionDelay: "1700ms" }}
+            style={{ transitionDelay: "600ms" }}
           >
             <IconButton
               size="large"
@@ -303,7 +303,7 @@ export default function Header(props) {
           <Fade
             in={true}
             {...{ timeout: 500 }}
-            style={{ transitionDelay: "1900ms" }}
+            style={{ transitionDelay: "700ms" }}
           >
             <IconButton
               size="large"
@@ -318,7 +318,7 @@ export default function Header(props) {
           <Fade
             in={true}
             {...{ timeout: 500 }}
-            style={{ transitionDelay: "2100ms" }}
+            style={{ transitionDelay: "800ms" }}
           >
             <IconButton
               size="small"
