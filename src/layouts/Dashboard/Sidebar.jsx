@@ -30,7 +30,7 @@ const useStyles = () => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      marginLeft: drawerWidth,
+      marginLeft: '-16.875rem',
     },
   })
 };
