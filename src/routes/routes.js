@@ -10,7 +10,10 @@ export const routes = createBrowserRouter([
       };
     },
     children: [
-      { element: <Navigate to="/home" />, index: true },
+      {
+        index: true,
+        element: <Navigate to="/home" />,
+      },
       {
         path: "home",
         async lazy() {
@@ -31,7 +34,10 @@ export const routes = createBrowserRouter([
       };
     },
     children: [
-      { element: <Navigate to="/auth/login" />, index: true },
+      {
+        index: true,
+        element: <Navigate to="/auth/login" />,
+      },
       {
         path: "login",
         async lazy() {

@@ -1,4 +1,5 @@
 export const palette = {
+    mode: 'dark',
     common: {
         white: "#fff",
         black: '#000'
@@ -8,5 +9,8 @@ export const palette = {
     },
     secondary: {
         main: "rgba(255,255,255,.3)"
+    },
+    appbar: {
+        main: "rgba(29,40,53,.95)"
     }
 }

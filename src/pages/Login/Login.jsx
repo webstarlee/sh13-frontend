@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Link } from "@mui/material";
-import { LeeInput, LeeDivider, LeeButton, LeeCard } from "components";
+import { SHInput, SHDivider, SHButton, SHCard } from "components";
 
 const useStyles = () => ({
   root: {
@@ -21,19 +21,19 @@ export default function Login() {
   }
 
   return (
-    <LeeCard component="form" autoComplete="off">
+    <SHCard component="form" autoComplete="off">
       <Typography variant="h3" align="center" sx={classes.root} gutterBottom>
         Sign In
       </Typography>
-      <LeeInput
+      <SHInput
         size="small"
         fullWidth={true}
         label="Username"
         id="username"
         color="secondary"
       />
-      <LeeDivider />
-      <LeeInput
+      <SHDivider />
+      <SHInput
         size="small"
         fullWidth={true}
         label="Password"
@@ -41,18 +41,18 @@ export default function Login() {
         color="secondary"
         type="password"
       />
-      <LeeDivider height="large" />
-      <LeeButton
+      <SHDivider height="large" />
+      <SHButton
         variant="outlined"
         size="large"
         fullWidth={true}
         title="Sign In"
       />
-      <LeeDivider height="medium" />
+      <SHDivider height="medium" />
       <Typography variant="body2" align="center">
         Don't have an account yet? 
-        <Link onClick={handleLinkButton} sx={{cursor: "pointer"}}>&nbsp;Sign In.</Link>
+        <Link onClick={handleLinkButton} sx={{cursor: "pointer"}}>&nbsp;Sign Up.</Link>
       </Typography>
-    </LeeCard>
+    </SHCard>
   );
 }

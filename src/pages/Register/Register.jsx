@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Link } from "@mui/material";
-import { LeeInput, LeeDivider, LeeButton, LeeCard } from "components";
+import { SHInput, SHDivider, SHButton, SHCard } from "components";
 
 const useStyles = () => ({
   root: {
@@ -21,27 +21,27 @@ export default function Register() {
   }
 
   return (
-    <LeeCard component="form" autoComplete="off">
+    <SHCard component="form" autoComplete="off">
       <Typography variant="h3" align="center" sx={classes.root} gutterBottom>
         Sign Up
       </Typography>
-      <LeeInput
+      <SHInput
         size="small"
         fullWidth={true}
         label="Username"
         id="username"
         color="secondary"
       />
-      <LeeDivider height="small" />
-      <LeeInput
+      <SHDivider height="small" />
+      <SHInput
         size="small"
         fullWidth={true}
         label="UserId"
         id="userid"
         color="secondary"
       />
-      <LeeDivider height="small" />
-      <LeeInput
+      <SHDivider height="small" />
+      <SHInput
         size="small"
         fullWidth={true}
         label="Password"
@@ -49,8 +49,8 @@ export default function Register() {
         color="secondary"
         type="password"
       />
-      <LeeDivider height="small" />
-      <LeeInput
+      <SHDivider height="small" />
+      <SHInput
         size="small"
         fullWidth={true}
         label="Password Confirm"
@@ -58,18 +58,18 @@ export default function Register() {
         color="secondary"
         type="password"
       />
-      <LeeDivider height="medium" />
-      <LeeButton
+      <SHDivider height="medium" />
+      <SHButton
         variant="outlined"
         size="large"
         fullWidth={true}
         title="Sign Up"
       />
-      <LeeDivider height="small" />
+      <SHDivider height="small" />
       <Typography variant="body2" align="center">
         Already have an Account?
         <Link onClick={handleLinkButton} sx={{cursor: "pointer"}}>&nbsp;Sign In.</Link>
       </Typography>
-    </LeeCard>
+    </SHCard>
   );
 }
