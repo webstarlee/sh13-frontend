@@ -1,5 +1,6 @@
-import React from "react";
-import { Outlet, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Outlet, useNavigate, Navigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 
 const useStyles = () => ({
@@ -19,10 +20,20 @@ const useStyles = () => ({
 
 function AuthLayout() {
   const classes = useStyles();
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const accessToken = window.sessionStorage.getItem("access_token");
+  useEffect(() => {
+    if (currentUser && currentUser.username) {
+      navigate("/home", { replace: true });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]);
+
   if (accessToken) {
     return <Navigate to="/home" replace />;
   }
+
   return (
     <Box sx={classes.box}>
       <Box sx={classes.content}>

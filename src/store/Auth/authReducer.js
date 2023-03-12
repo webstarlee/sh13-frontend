@@ -7,20 +7,22 @@ const INITIAL_STATE = {
 
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case types.LOG_IN_SUCCESS:
-      window.sessionStorage.setItem("access_token", action.payload.token);
+    case types.LOGIN_SUCCESS:
+      console.log(action);
+      window.sessionStorage.setItem("access_token", action.payload.accessToken);
       return {
         ...state,
-        currentUser: action.payload,
+        currentUser: action.payload.user,
         error: null,
       };
-    case types.LOG_IN_FAILURE:
+    case types.LOGIN_FAILURE:
     case types.REGISTER_FAILURE:
       return {
         ...state,
         error: action.payload.response.data,
       };
     case types.LOG_OUT:
+      window.sessionStorage.clear();
       return INITIAL_STATE;
     case types.CLEAR_ERROR:
       return {

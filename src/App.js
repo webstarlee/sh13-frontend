@@ -11,7 +11,7 @@ function App() {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme} >
-        <RouterProvider router={router}/>
+        <RouterProvider router={router} fallbackElement={<div style={{height: "100vh", width: "100%"}}>asdfasdf</div>}/>
         <Toast />
       </ThemeProvider>
     </Provider>

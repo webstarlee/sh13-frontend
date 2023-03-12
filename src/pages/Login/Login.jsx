@@ -18,18 +18,11 @@ export default function Login() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.currentUser);
   const error = useSelector((state) => state.auth.error);
-  const [credentials, setCredentials] = useState({ userId: "", password: "" });
-  const handleChange = (e) =>
+  const [credentials, setCredentials] = useState({ username: "", password: "" });
+  const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-
-  useEffect(() => {
-    if (currentUser && currentUser.user) {
-      navigate("/home");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }
 
   useEffect(() => {
     if (error) {
@@ -43,13 +36,13 @@ export default function Login() {
   }, [error]);
 
   const handleClick = () => {
-    if (!credentials.userId) {
+    if (!credentials.username) {
       dispatch(
         openToast({
           IsOpen: true,
           title: "Error",
           type: "error",
-          comment: "User Id field is required",
+          comment: "Username field is required",
         })
       );
       return;
@@ -60,7 +53,7 @@ export default function Login() {
           IsOpen: true,
           title: "Error",
           type: "error",
-          comment: "Username field is required",
+          comment: "Password field is required",
         })
       );
       return;
@@ -80,11 +73,11 @@ export default function Login() {
       <SHInput
         size="small"
         fullWidth={true}
-        label="UserId"
-        id="username"
+        label="Username"
+        id="fullname"
         color="secondary"
-        name="userId"
-        value={credentials.userId}
+        name="username"
+        value={credentials.username}
         onChange={handleChange}
       />
       <SHDivider />

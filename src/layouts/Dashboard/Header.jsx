@@ -228,8 +228,6 @@ export default function Header(props) {
 
   const logout = () => {
     dispatch(logOut());
-    window.sessionStorage.clear();
-    navigate("/");
   };
 
   return (

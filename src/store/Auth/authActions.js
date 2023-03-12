@@ -1,17 +1,17 @@
 import types from './authTypes';
 
 export const logInStart = (credentials) => ({
-  type: types.LOG_IN_START,
+  type: types.LOGIN_START,
   payload: credentials,
 });
 
 export const logInSuccess = (user) => ({
-  type: types.LOG_IN_SUCCESS,
+  type: types.LOGIN_SUCCESS,
   payload: user,
 });
 
 export const logInFailure = (error) => ({
-  type: types.LOG_IN_FAILURE,
+  type: types.LOGIN_FAILURE,
   payload: error,
 });
 

@@ -3,18 +3,20 @@ import { API_URL } from "../../constants/index";
 
 const token = window.sessionStorage.getItem("access_token");
 
-const logIn = async (userId, password) => {
+const logIn = async (username, password) => {
   const response = await axios.post(`${API_URL}/auth/signin`, {
-    userId,
+    username,
     password,
   });
-  return { token: response.data.accessToken, user: response.data };
+
+  console.log(response);
+  return response.data;
 };
 
-const register = async (username, userId, password, confirmPassword) => {
+const register = async (fullname, username, password, confirmPassword) => {
   await axios.post(`${API_URL}/auth/signup`, {
+    fullname,
     username,
-    userId,
     password,
     confirmPassword,
   });

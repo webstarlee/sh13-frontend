@@ -1,14 +1,12 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import { RequireAuth } from "./AuthCheck";
+import { DashboadLayout } from "layouts/Dashboard";
+import { AuthLayout } from "layouts/Auth";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    async lazy() {
-      let { DashboadLayout } = await import("layouts/Dashboard");
-      return {
-        Component: DashboadLayout,
-      };
-    },
+    element: <RequireAuth><DashboadLayout /></RequireAuth>,
     children: [
       {
         index: true,
@@ -27,12 +25,7 @@ export const routes = createBrowserRouter([
   },
   {
     path: "/auth",
-    async lazy() {
-      let { AuthLayout } = await import("layouts/Auth");
-      return {
-        Component: AuthLayout,
-      };
-    },
+    element: <AuthLayout />,
     children: [
       {
         index: true,

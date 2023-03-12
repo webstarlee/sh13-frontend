@@ -1,6 +1,6 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Header from "./Header";
@@ -37,21 +37,44 @@ const useStyles = () => {
 
 function DashboardLayout() {
   const classes = useStyles();
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.auth.currentUser);
   const [extended, setExtended] = useState(true);
+  const calledOnce = React.useRef(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.currentUser);
+
   useEffect(() => {
-    dispatch(getUserInfo());
-  }, []);
+    if (calledOnce.current) {
+      return;
+    }
+
+    return () => {
+      console.log("C")
+      const accessToken = window.sessionStorage.getItem("access_token");
+      if (!accessToken) {
+        navigate("/auth/login", { replace: true });
+      } else {
+        if (currentUser === null) {
+          dispatch(getUserInfo());
+          calledOnce.current = true;
+        }
+      }
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    console.log("B")
+    const accessToken = window.sessionStorage.getItem("access_token");
+    if (!accessToken && currentUser === null) {
+      console.log("D");
+      navigate("/auth/login", { replace: true });
+    }
+  }, [currentUser]);
 
   const handleExtended = () => {
     setExtended(!extended);
   };
 
-  const accessToken = window.sessionStorage.getItem("access_token");
-  if (!accessToken) {
-    return <Navigate to="/auth" replace />;
-  }
   return (
     <Fragment>
       <Header sidebarHandle={handleExtended} />

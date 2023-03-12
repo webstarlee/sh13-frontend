@@ -9,9 +9,9 @@ import {
 import types from "./authTypes";
 import { logIn, register, getUserApi } from "./authApis";
 
-export function* logInWithCredentials({ payload: { userId, password } }) {
+export function* logInWithCredentials({ payload: { username, password } }) {
   try {
-    const user = yield logIn(userId, password);
+    const user = yield logIn(username, password);
     yield put(logInSuccess(user));
   } catch (error) {
     yield put(logInFailure(error));
@@ -19,11 +19,11 @@ export function* logInWithCredentials({ payload: { userId, password } }) {
 }
 
 export function* registerWithCredentials({
-  payload: { username, userId, password, confirmPassword },
+  payload: { fullname, username, password, confirmPassword },
 }) {
   try {
-    yield register(username, userId, password, confirmPassword);
-    yield put(registerSuccess({ userId, password }));
+    yield register(fullname, username, password, confirmPassword);
+    yield put(registerSuccess({ username, password }));
   } catch (error) {
     yield put(registerFailure(error));
   }
@@ -36,12 +36,12 @@ export function* getUser() {
   } catch (error) {}
 }
 
-export function* logInAfterRegister({ payload: { userId, password } }) {
-  yield logInWithCredentials({ payload: { userId, password } });
+export function* logInAfterRegister({ payload: { username, password } }) {
+  yield logInWithCredentials({ payload: { username, password } });
 }
 
 export function* onLogInStart() {
-  yield takeLatest(types.LOG_IN_START, logInWithCredentials);
+  yield takeLatest(types.LOGIN_START, logInWithCredentials);
 }
 
 export function* onRegisterStart() {

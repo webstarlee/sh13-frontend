@@ -18,24 +18,17 @@ export default function Register() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.currentUser);
   const error = useSelector((state) => state.auth.error);
   const [credentials, setCredentials] = useState({
+    fullname: "",
     username: "",
-    userId: "",
     password: "",
     confirmPassword: "",
   });
 
-  const handleChange = (e) =>
+  const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-
-  useEffect(() => {
-    if (currentUser && currentUser.user) {
-      navigate("/home", { replace: true });
-    }
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }
 
   useEffect(() => {
     if (error) {
@@ -49,6 +42,17 @@ export default function Register() {
   }, [error]);
 
   const handleClick = () => {
+    if (!credentials.fullname) {
+      dispatch(
+        openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "Fullname field is required",
+        })
+      );
+      return;
+    }
     if (!credentials.username) {
       dispatch(
         openToast({
@@ -56,17 +60,6 @@ export default function Register() {
           title: "Error",
           type: "error",
           comment: "Username field is required",
-        })
-      );
-      return;
-    }
-    if (!credentials.userId) {
-      dispatch(
-        openToast({
-          IsOpen: true,
-          title: "Error",
-          type: "error",
-          comment: "User Id field is required",
         })
       );
       return;
@@ -96,22 +89,22 @@ export default function Register() {
       <SHInput
         size="small"
         fullWidth={true}
-        label="Username"
-        id="username"
+        label="Fullname"
+        id="fullname"
         color="secondary"
-        name="username"
-        value={credentials.username}
+        name="fullname"
+        value={credentials.fullname}
         onChange={handleChange}
       />
       <SHDivider height="small" />
       <SHInput
         size="small"
         fullWidth={true}
-        label="UserId"
-        id="userid"
+        label="username"
+        id="username"
         color="secondary"
-        name="userId"
-        value={credentials.userId}
+        name="username"
+        value={credentials.username}
         onChange={handleChange}
       />
       <SHDivider height="small" />
