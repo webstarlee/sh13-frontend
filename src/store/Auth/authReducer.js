@@ -25,7 +25,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case types.CLEAR_ERROR:
       return {
         ...state,
-        erorr: null,
+        error: null,
       };
     default:
       return state;

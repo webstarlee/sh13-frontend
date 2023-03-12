@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Typography, Link } from "@mui/material";
 import { SHInput, SHDivider, SHButton, SHCard } from "components";
 import { registerStart, clearError } from "store/Auth/authActions";
+import { openToast } from "store/Layout/layoutActions";
 
 const useStyles = () => ({
   root: {
@@ -37,11 +38,25 @@ export default function Register() {
 
   useEffect(() => {
     if (error) {
+      const err = Object.values(error)[0];
+      dispatch(openToast({ title: "Error", type: "error", comment: err }));
       dispatch(clearError());
     }
   }, [error]);
 
   const handleClick = () => {
+    if(!credentials.username) {
+      dispatch(openToast({ title: "Error", type: "error", comment: "Username field is required" }));
+      return;
+    }
+    if(!credentials.userId) {
+      dispatch(openToast({ title: "Error", type: "error", comment: "User Id field is required" }));
+      return;
+    }
+    if(credentials.password !== credentials.creconfirmPassword) {
+      dispatch(openToast({ title: "Error", type: "error", comment: "Password must match" }));
+      return;
+    } 
     dispatch(registerStart(credentials));
   };
   const handleLinkButton = () => {
