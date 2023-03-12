@@ -37,3 +37,7 @@ export const logOut = () => ({
 export const clearError = () => ({
   type: types.CLEAR_ERROR,
 });
+
+export const getUserInfo = () =>({
+  type: types.GET_USER_START
+})

@@ -27,6 +27,11 @@ const authReducer = (state = INITIAL_STATE, action) => {
         ...state,
         error: null,
       };
+    case types.GET_USER_SUCCESS:
+      return {
+        ...state,
+        currentUser: action.payload.user,
+      };
     default:
       return state;
   }

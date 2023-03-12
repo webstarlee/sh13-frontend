@@ -1,8 +1,13 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from "redux-saga/effects";
 
-import { logInFailure, logInSuccess, registerFailure, registerSuccess } from './authActions';
-import types from './authActionTypes';
-import { logIn, register } from './authApis';
+import {
+  logInFailure,
+  logInSuccess,
+  registerFailure,
+  registerSuccess,
+} from "./authActions";
+import types from "./authActionTypes";
+import { logIn, register, getUserApi } from "./authApis";
 
 export function* logInWithCredentials({ payload: { userId, password } }) {
   try {
@@ -13,13 +18,23 @@ export function* logInWithCredentials({ payload: { userId, password } }) {
   }
 }
 
-export function* registerWithCredentials({ payload: { username, userId, password, confirmPassword } }) {
+export function* registerWithCredentials({
+  payload: { username, userId, password, confirmPassword },
+}) {
   try {
     yield register(username, userId, password, confirmPassword);
     yield put(registerSuccess({ userId, password }));
   } catch (error) {
     yield put(registerFailure(error));
   }
+}
+
+export function* getUser() {
+  try {
+    const user = yield getUserApi();
+    console.log(user);
+    yield put({ type: types.GET_USER_SUCCESS, payload: user });
+  } catch (error) {}
 }
 
 export function* logInAfterRegister({ payload: { userId, password } }) {
@@ -38,6 +53,15 @@ export function* onRegisterSuccess() {
   yield takeLatest(types.REGISTER_SUCCESS, logInAfterRegister);
 }
 
+export function* onGetUserStart() {
+  yield takeLatest(types.GET_USER_START, getUser);
+}
+
 export function* authSagas() {
-  yield all([call(onLogInStart), call(onRegisterStart), call(onRegisterSuccess)]);
+  yield all([
+    call(onLogInStart),
+    call(onRegisterStart),
+    call(onRegisterSuccess),
+    call(onGetUserStart)
+  ]);
 }
