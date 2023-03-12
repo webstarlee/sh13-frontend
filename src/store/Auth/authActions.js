@@ -1,4 +1,4 @@
-import types from './authActionTypes';
+import types from './authTypes';
 
 export const logInStart = (credentials) => ({
   type: types.LOG_IN_START,

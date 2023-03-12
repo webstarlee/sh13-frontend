@@ -40,9 +40,6 @@ function DashboardLayout() {
     dispatch(getUserInfo());
   }, []);
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
   const handleExtended = () => {
     setExtended(!extended);
   };

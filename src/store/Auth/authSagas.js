@@ -6,7 +6,7 @@ import {
   registerFailure,
   registerSuccess,
 } from "./authActions";
-import types from "./authActionTypes";
+import types from "./authTypes";
 import { logIn, register, getUserApi } from "./authApis";
 
 export function* logInWithCredentials({ payload: { userId, password } }) {
@@ -32,7 +32,6 @@ export function* registerWithCredentials({
 export function* getUser() {
   try {
     const user = yield getUserApi();
-    console.log(user);
     yield put({ type: types.GET_USER_SUCCESS, payload: user });
   } catch (error) {}
 }

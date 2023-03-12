@@ -8,7 +8,6 @@ const logIn = async (userId, password) => {
     userId,
     password,
   });
-  console.log(response)
   return { token: response.data.accessToken, user: response.data };
 };
 
@@ -22,7 +21,6 @@ const register = async (username, userId, password, confirmPassword) => {
 };
 
 const getUserApi = async () => {
-  console.log("response")
   const response = await axios.get(`${API_URL}user/current`, {
     headers: {
       "x-access-token": token,

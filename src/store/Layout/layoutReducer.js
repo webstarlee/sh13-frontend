@@ -1,4 +1,4 @@
-import types from "./layoutActionTypes";
+import types from "./layoutTypes";
 
 const INITIAL_STATE = {
   openToast: false,
@@ -10,14 +10,8 @@ const layoutReducer = (state = INITIAL_STATE, action) => {
     case types.OPEN_TOAST:
       return {
         ...state,
-        openToast: true,
-        toastData: action.data,
-      };
-    case types.CLOSE_TOAST:
-      return {
-        ...state,
-        openToast: false,
-        toastData: {},
+        openToast: action.data.IsOpen,
+        toastData: action.data.IsOpen ? action.data : false,
       };
     default:
       return state;
