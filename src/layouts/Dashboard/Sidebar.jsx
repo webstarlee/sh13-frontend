@@ -1,10 +1,9 @@
-import react from "react";
 import { useTheme } from '@mui/material/styles';
 import { Drawer } from "@mui/material";
 import { SHNavigation } from "components";
 import { navigationData } from "./data";
 
-const drawerWidth = 210;
+const drawerWidth = '16.875rem';
 
 const useStyles = () => {
   const theme = useTheme();
@@ -31,7 +30,7 @@ const useStyles = () => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      marginLeft: "-210px",
+      marginLeft: drawerWidth,
     },
   })
 };

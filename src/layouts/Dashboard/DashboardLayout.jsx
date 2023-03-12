@@ -20,7 +20,8 @@ const useStyles = () => {
       }),
     },
     fullContent: {
-      marginLeft: "210px",
+      marginLeft: "16.875rem",
+      paddingLeft: "0.1rem",
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,

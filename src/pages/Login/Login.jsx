@@ -28,6 +28,7 @@ export default function Login() {
     if (currentUser && currentUser.user) {
       navigate('/home');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function Login() {
       dispatch(openToast({ title: "Error", type: "error", comment: err }));
       dispatch(clearError())
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   const handleClick = () => {
@@ -91,8 +93,8 @@ export default function Login() {
       />
       <SHDivider height="medium" />
       <Typography variant="body2" align="center">
-        Don't have an account yet? 
-        <Link onClick={handleLinkButton} sx={{cursor: "pointer"}}>&nbsp;Sign Up.</Link>
+        Don't have an account yet?
+        <Link onClick={handleLinkButton} sx={{ cursor: "pointer" }}>&nbsp;Sign Up.</Link>
       </Typography>
     </SHCard>
   );

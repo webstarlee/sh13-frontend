@@ -34,6 +34,7 @@ export default function Register() {
     if (currentUser && currentUser.user) {
       navigate("/home", { replace: true });
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function Register() {
       dispatch(openToast({ title: "Error", type: "error", comment: err }));
       dispatch(clearError());
     }
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   const handleClick = () => {

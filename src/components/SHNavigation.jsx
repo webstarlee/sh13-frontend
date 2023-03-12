@@ -1,9 +1,10 @@
 import React from "react";
 import { List } from "@mui/material";
 import SHNavigationItem from "./SHNavigationItem";
-const useStyles = () =>({
+const useStyles = () => ({
   list: {
     listStyle: "none",
+    paddingTop: '15px',
   },
 });
 
