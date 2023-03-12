@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { Box } from "@mui/material";
+import { Box, Icon } from "@mui/material";
 import GppMaybeIcon from '@mui/icons-material/GppMaybe';
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -40,7 +40,7 @@ export default function CustomizedSnackbars() {
       >
         <Box component="div" sx={classes.Toast}>
           <Box component="div" sx={classes.ToastBody}>
-            sdfsdfsdfsdfsf dfsdfsd
+            <GppMaybeIcon />
           </Box>
           <Box component="div" sx={classes.ToastArrow}>
             <Box component="div" sx={classes.ToastArrowTopLeft}></Box>
