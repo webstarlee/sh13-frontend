@@ -4,7 +4,6 @@ import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from '@mui/material/styles';
 import { router } from "routes";
 import { theme } from "theme";
-import { NotificationContainer } from 'react-notifications';
 import store from "./store";
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
     <Provider store={store}>
       <ThemeProvider theme={theme} >
         <RouterProvider router={router}/>
-        <NotificationContainer />
       </ThemeProvider>
     </Provider>
   );
