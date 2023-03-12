@@ -1,6 +1,6 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import Box from '@mui/material/Box';
+import { Outlet, Navigate } from "react-router-dom";
+import Box from "@mui/material/Box";
 
 const useStyles = () => ({
   box: {
@@ -14,13 +14,15 @@ const useStyles = () => ({
     margin: "0 auto",
     position: "relative",
     flex: 1,
-  }
+  },
 });
 
 function AuthLayout() {
-
   const classes = useStyles();
-
+  const accessToken = window.sessionStorage.getItem("access_token");
+  if (accessToken) {
+    return <Navigate to="/home" replace />;
+  }
   return (
     <Box sx={classes.box}>
       <Box sx={classes.content}>

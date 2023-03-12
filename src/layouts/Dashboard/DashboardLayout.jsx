@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useTheme } from '@mui/material/styles';
 import Header from './Header';
 
@@ -17,6 +17,10 @@ function DashboardLayout() {
 
   const classes = useStyles();
 
+  const accessToken = window.sessionStorage.getItem('access_token');
+  if (!accessToken) {
+    return <Navigate to="/auth" replace />;
+  }
   return (
     <Fragment>
       <Header />

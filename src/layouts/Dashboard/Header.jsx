@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import {
   AppBar,
@@ -15,6 +17,7 @@ import {
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import { logOut } from 'store/Auth/authActions';
 
 const useStyles = () => {
   const theme = useTheme();
@@ -175,6 +178,8 @@ const useStyles = () => {
 
 export default function Header(props) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
@@ -183,6 +188,12 @@ export default function Header(props) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logout = () => {
+    dispatch(logOut());
+    window.sessionStorage.clear();
+    navigate("/");
   };
 
   return (
@@ -311,7 +322,7 @@ export default function Header(props) {
           onClose={handleClose}
         >
           <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={handleClose}>My account</MenuItem>
+          <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>

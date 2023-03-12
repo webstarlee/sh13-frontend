@@ -1,17 +1,17 @@
-import types from './authTypes';
+import types from './authActionTypes';
 
 export const logInStart = (credentials) => ({
-  type: types.LOGIN_START,
+  type: types.LOG_IN_START,
   payload: credentials,
 });
 
 export const logInSuccess = (user) => ({
-  type: types.LOGIN_SUCCESS,
+  type: types.LOG_IN_SUCCESS,
   payload: user,
 });
 
 export const logInFailure = (error) => ({
-  type: types.LOGIN_FAILURE,
+  type: types.LOG_IN_FAILURE,
   payload: error,
 });
 
@@ -32,4 +32,8 @@ export const registerFailure = (error) => ({
 
 export const logOut = () => ({
   type: types.LOG_OUT,
+});
+
+export const clearError = () => ({
+  type: types.CLEAR_ERROR,
 });

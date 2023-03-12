@@ -1,24 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Typography, Link } from "@mui/material";
+import { NotificationManager } from "react-notifications";
 import { SHInput, SHDivider, SHButton, SHCard } from "components";
+import { registerStart, clearError } from "store/Auth/authActions";
 
 const useStyles = () => ({
   root: {
-    '&.MuiTypography-root': {
+    "&.MuiTypography-root": {
       fontFamily: "shot",
-    }
-  }
+    },
+  },
 });
 
 export default function Register() {
-
-  const navigate = useNavigate();
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.auth.currentUser);
+  const error = useSelector((state) => state.auth.error);
+  const [credentials, setCredentials] = useState({
+    username: "",
+    userId: "",
+    password: "",
+    confirmPassword: "",
+  });
 
+  const handleChange = (e) =>
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+
+  useEffect(() => {
+    if (currentUser && currentUser.user) {
+      navigate("/home", { replace: true });
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (error) {
+      NotificationManager.error(Object.values(error)[0]);
+      dispatch(clearError());
+    }
+  }, [error]);
+
+  const handleClick = () => {
+    dispatch(registerStart(credentials));
+  };
   const handleLinkButton = () => {
     navigate("/auth/login");
-  }
+  };
 
   return (
     <SHCard component="form" autoComplete="off">
@@ -31,6 +61,9 @@ export default function Register() {
         label="Username"
         id="username"
         color="secondary"
+        name="username"
+        value={credentials.username}
+        onChange={handleChange}
       />
       <SHDivider height="small" />
       <SHInput
@@ -39,6 +72,9 @@ export default function Register() {
         label="UserId"
         id="userid"
         color="secondary"
+        name="userId"
+        value={credentials.userId}
+        onChange={handleChange}
       />
       <SHDivider height="small" />
       <SHInput
@@ -48,6 +84,9 @@ export default function Register() {
         id="password"
         color="secondary"
         type="password"
+        name="password"
+        value={credentials.password}
+        onChange={handleChange}
       />
       <SHDivider height="small" />
       <SHInput
@@ -57,6 +96,9 @@ export default function Register() {
         id="password_confirm"
         color="secondary"
         type="password"
+        name="confirmPassword"
+        value={credentials.confirmPassword}
+        onChange={handleChange}
       />
       <SHDivider height="medium" />
       <SHButton
@@ -64,11 +106,14 @@ export default function Register() {
         size="large"
         fullWidth={true}
         title="Sign Up"
+        onClick={handleClick}
       />
       <SHDivider height="small" />
       <Typography variant="body2" align="center">
         Already have an Account?
-        <Link onClick={handleLinkButton} sx={{cursor: "pointer"}}>&nbsp;Sign In.</Link>
+        <Link onClick={handleLinkButton} sx={{ cursor: "pointer" }}>
+          &nbsp;Sign In.
+        </Link>
       </Typography>
     </SHCard>
   );

@@ -18,7 +18,7 @@ const useStyles = () => {
 };
 
 export default function LeeButton(props) {
-  const { title = "Button", variant, size, fullWidth } = props;
+  const { title = "Button", variant, size, fullWidth, ...rest } = props;
 
   const classes = useStyles();
 
@@ -28,6 +28,7 @@ export default function LeeButton(props) {
       size={size}
       fullWidth={fullWidth}
       sx={classes.buttonBase}
+      {...rest}
     >
       {title}
     </Button>
