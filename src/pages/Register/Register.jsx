@@ -37,7 +37,6 @@ export default function Register() {
 
   useEffect(() => {
     if (error) {
-      NotificationManager.error(Object.values(error)[0]);
       dispatch(clearError());
     }
   }, [error]);
