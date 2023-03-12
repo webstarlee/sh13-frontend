@@ -69,7 +69,6 @@ export default function Home() {
               onChange={(newValue) => {
                 setValue(newValue);
               }}
-              renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
         </div>
