@@ -3,12 +3,15 @@ import { Drawer } from "@mui/material";
 import { SHNavigation } from "components";
 import { navigationData } from "./data";
 
-const drawerWidth = '16.875rem';
+const drawerWidth = '210px';
 
 const useStyles = () => {
   const theme = useTheme();
   return ({
     drawerPaper: {
+      [theme.breakpoints.down("sm")]: {
+        marginLeft: '-210px',
+      },
       width: drawerWidth,
       display: "flex",
       top: "52px",
@@ -30,7 +33,7 @@ const useStyles = () => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
-      marginLeft: '-16.875rem',
+      marginLeft: '-210px',
     },
   })
 };
