@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Typography, Link } from "@mui/material";
-import { NotificationManager } from "react-notifications";
 import { SHInput, SHDivider, SHButton, SHCard } from "components";
 import { registerStart, clearError } from "store/Auth/authActions";
 
