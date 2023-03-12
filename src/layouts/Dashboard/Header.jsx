@@ -13,10 +13,15 @@ import {
   Badge,
   Box,
   Fade,
+  Avatar,
+  ListItemIcon
 } from "@mui/material";
-import AccountCircle from "@mui/icons-material/AccountCircle";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import Settings from '@mui/icons-material/Settings';
+import Logout from '@mui/icons-material/Logout';
 import { logOut } from 'store/Auth/authActions';
 
 const useStyles = () => {
@@ -25,6 +30,7 @@ const useStyles = () => {
     appBar: {
       boxShadow: "none",
       backgroundImage: "unset",
+      zIndex: 1201
     },
     toolBar: {
       minHeight: "52px",
@@ -173,10 +179,41 @@ const useStyles = () => {
         bottom: 0,
       },
     },
+    menuPaper: {
+      background: theme.palette.appbar.main,
+      overflow: 'visible',
+      boxShadow: "0 0.5rem 1rem rgb(255 255 255 / 8%)",
+      borderRadius: "0px",
+      filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+      mt: 1.5,
+      border: "1px solid rgba(255,255,255,.15)",
+      minWidth: "160px",
+      "& .MuiMenuItem-root": {
+        fontFamily: "chakra_medium",
+        color: "rgba(255,255,255,.5)",
+        textTransform: "uppercase",
+        fontSize: "11px",
+        letterSpacing: "0.15em",
+        justifyContent: "space-between",
+        "&:hover": {
+          color: "#fff",
+          "& .MuiListItemIcon-root>svg": {
+            color: "#fff"
+          }
+        }
+      },
+      '& .MuiAvatar-root': {
+        width: 32,
+        height: 32,
+        ml: -0.5,
+        mr: 1,
+      },
+    }
   };
 };
 
 export default function Header(props) {
+  const {sidebarHandle} = props;
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -198,9 +235,9 @@ export default function Header(props) {
 
   return (
     <AppBar
-      position="static"
+      position="fixed"
       color="appbar"
-      enableColorOnDark="true"
+      enableColorOnDark={true}
       sx={classes.appBar}
     >
       <Toolbar sx={classes.toolBar}>
@@ -210,33 +247,34 @@ export default function Header(props) {
           color="inherit"
           aria-label="menu"
           sx={classes.sidebarToggleBtn}
+          onClick={sidebarHandle}
         >
-          <Divider component="span" light="true" sx={classes.hamburger} />
+          <Divider component="span" light={true} sx={classes.hamburger} />
         </IconButton>
         <Typography variant="h6" component="div" sx={classes.logoImg}>
           <Fade
-            in="true"
+            in={true}
             {...{ timeout: 500 }}
             style={{ transitionDelay: "1400ms" }}
           >
-            <Typography variant="h6">SH13</Typography>
+            <Typography variant="h6" sx={{fontFamily: "chakra_bold"}}>SH13</Typography>
           </Fade>
           <Fade
-            in="true"
+            in={true}
             {...{ timeout: 500 }}
             style={{ transitionDelay: "500ms" }}
           >
             <Typography component="div" sx={classes.ArrowTopLeft}></Typography>
           </Fade>
           <Fade
-            in="true"
+            in={true}
             {...{ timeout: 500 }}
             style={{ transitionDelay: "700ms" }}
           >
             <Typography component="div" sx={classes.ArrowTopRight}></Typography>
           </Fade>
           <Fade
-            in="true"
+            in={true}
             {...{ timeout: 500 }}
             style={{ transitionDelay: "900ms" }}
           >
@@ -246,7 +284,7 @@ export default function Header(props) {
             ></Typography>
           </Fade>
           <Fade
-            in="true"
+            in={true}
             {...{ timeout: 500 }}
             style={{ transitionDelay: "1100ms" }}
           >
@@ -257,9 +295,9 @@ export default function Header(props) {
           </Fade>
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
-        <Box sx={{ display: { xs: "none", md: "flex" } }}>
+        <Box>
           <Fade
-            in="true"
+            in={true}
             {...{ timeout: 500 }}
             style={{ transitionDelay: "1700ms" }}
           >
@@ -274,7 +312,7 @@ export default function Header(props) {
             </IconButton>
           </Fade>
           <Fade
-            in="true"
+            in={true}
             {...{ timeout: 500 }}
             style={{ transitionDelay: "1900ms" }}
           >
@@ -289,40 +327,56 @@ export default function Header(props) {
             </IconButton>
           </Fade>
           <Fade
-            in="true"
+            in={true}
             {...{ timeout: 500 }}
             style={{ transitionDelay: "2100ms" }}
           >
             <IconButton
-              size="large"
+              size="small"
               aria-label="account of current user"
-              aria-controls="menu-appbar"
               aria-haspopup="true"
+              aria-controls={Boolean(anchorEl) ? 'account-menu' : undefined}
+              aria-expanded={Boolean(anchorEl) ? 'true' : undefined}
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
             </IconButton>
           </Fade>
         </Box>
 
         <Menu
-          id="menu-appbar"
           anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
+          id="account-menu"
           open={Boolean(anchorEl)}
           onClose={handleClose}
+          onClick={handleClose}
+          PaperProps={{
+            elevation: 0,
+            sx: classes.menuPaper,
+          }}
+          transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+          anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem onClick={handleClose}>Profile</MenuItem>
-          <MenuItem onClick={logout}>Logout</MenuItem>
+          <MenuItem onClick={handleClose}>
+            Profile
+            <ListItemIcon sx={{justifyContent: 'flex-end'}}>
+              <AccountCircleOutlinedIcon color="primary" fontSize="small" />
+            </ListItemIcon>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>
+            Setting
+            <ListItemIcon sx={{justifyContent: 'flex-end'}}>
+              <SettingsOutlinedIcon color="primary" fontSize="small" />
+            </ListItemIcon>
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={logout}>
+            Sign out
+            <ListItemIcon sx={{justifyContent: 'flex-end'}}>
+              <Logout color="primary" fontSize="small" />
+            </ListItemIcon>
+          </MenuItem>
         </Menu>
       </Toolbar>
     </AppBar>
