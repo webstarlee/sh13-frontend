@@ -22,7 +22,10 @@ const useStyles = () => {
       }),
     },
     fullContent: {
-      marginLeft: "16.875rem",
+      marginLeft: "210px",
+      [theme.breakpoints.down("sm")]: {
+        marginLeft: '-0px',
+      },
       paddingLeft: "0.1rem",
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
