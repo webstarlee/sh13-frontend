@@ -2,23 +2,56 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
-import { Box, Icon } from "@mui/material";
-import GppMaybeIcon from '@mui/icons-material/GppMaybe';
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+import { Box, Typography } from "@mui/material";
+import GppMaybeIcon from "@mui/icons-material/GppMaybe";
+import CloseIcon from "@mui/icons-material/Close";
 
 const useStyles = () => ({
-  
+  toastRoot: {
+    position: "fixed",
+    top: "3.25rem",
+    paddingTop: "1rem",
+    width: "21.875rem",
+    right: "0",
+    paddingRight: "1rem",
+  },
+  toast: {
+    width: "350px",
+    maxWidth: "100%",
+    fontSize: ".875rem",
+    pointerEvents: "auto",
+    backgroundColor: "rgba(32,43,54,.85)",
+    backgroundClip: "padding-box",
+    border: "1px solid rgba(255,255,255,.15)",
+    boxShadow: "0 0.5rem 1rem rgb(255 255 255 / 8%)",
+    borderRadius: 0,
+  },
+  toastHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: "0.5rem 0.75rem",
+    color: "#fff",
+    backgroundColor: "rgba(32,43,54,.85)",
+    backgroundClip: "padding-box",
+    borderBottom: "1px solid rgba(255,255,255,.15)",
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+  },
+  toastBody: {
+    padding: "0.75rem",
+    wordWrap: "break-word",
+  },
+  toastTitle: {
+    marginRight: "auto",
+  },
+  toastClose: {
+    cursor: "pointer",
+  }
 });
 
-export default function CustomizedSnackbars() {
+export default function CustomizedSnackbars(props) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
-
-
   const handleClick = () => {
     setOpen(true);
   };
@@ -38,15 +71,16 @@ export default function CustomizedSnackbars() {
         autoHideDuration={2000}
         onClose={handleClose}
       >
-        <Box component="div" sx={classes.Toast}>
-          <Box component="div" sx={classes.ToastBody}>
-            <GppMaybeIcon />
-          </Box>
-          <Box component="div" sx={classes.ToastArrow}>
-            <Box component="div" sx={classes.ToastArrowTopLeft}></Box>
-            <Box component="div" sx={classes.ToastArrowTopRight}></Box>
-            <Box component="div" sx={classes.ToastArrowBottomRight}></Box>
-            <Box component="div" sx={classes.ToastArrowBottomLeft}></Box>
+        <Box component="div" sx={classes.toastRoot}>
+          <Box component="div" sx={classes.toast}>
+            <Box component="div" sx={classes.toastHeader}>
+              <GppMaybeIcon color="error" />
+              <Typography sx={classes.toastTitle}>{"Error"}</Typography>
+              <CloseIcon onClick={handleClose} sx={classes.toastClose} />
+            </Box>
+            <Box component="div" sx={classes.toastBody}>
+              sdfsdfsfsffssdfsdf
+            </Box>
           </Box>
         </Box>
       </Snackbar>

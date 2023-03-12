@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { NotificationManager } from 'react-notifications';
 import { Typography, Link } from "@mui/material";
 import { SHInput, SHDivider, SHButton, SHCard } from "components";
 import { logInStart, clearError } from 'store/Auth/authActions';
@@ -32,7 +31,6 @@ export default function Login() {
 
   useEffect(() => {
     if (error) {
-      NotificationManager.error(Object.values(error)[0]);
       dispatch(clearError())
     }
   }, [error]);
