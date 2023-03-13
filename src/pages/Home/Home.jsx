@@ -66,8 +66,9 @@ export default function Home() {
           <SHModal
             open={open}
             onclose={handleClose}
+            cover={false}
             header="Test Modal"
-            size="small"
+            size="large"
           >
             ... This is SHModal Test ...
           </SHModal>
