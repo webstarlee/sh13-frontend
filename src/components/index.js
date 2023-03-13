@@ -3,3 +3,4 @@ export { default as SHDivider } from "./SHDivider";
 export { default as SHButton } from "./SHButton";
 export { default as SHCard } from "./SHCard";
 export { default as SHNavigation} from "./SHNavigation";
+export { default as SHModal} from "./SHModal";

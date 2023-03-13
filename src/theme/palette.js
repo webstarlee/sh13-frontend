@@ -14,5 +14,8 @@ export const palette = {
     },
     appbar: {
         main: "rgba(29,40,53,.95)"
+    },
+    modalFade: {
+        main: "rgba(29, 38, 53, 0.9)",
     }
 }
