@@ -21,6 +21,9 @@ const useStyles = () => {
       overflowY: 'auto',
       outline: '0',
       transition: 'opacity .55s linear',
+      [theme.breakpoints.down('md')]: {
+        padding: "0 15px",
+      },
       "& .MuiModal-backdrop": {
         backgroundColor: `${theme.palette.modalFade.main}`,
       }

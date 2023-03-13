@@ -16,6 +16,6 @@ export const palette = {
         main: "rgba(29,40,53,.95)"
     },
     modalFade: {
-        main: "rgba(29, 38, 53, 0.9)",
+        main: "rgba(29, 40, 53, 0.95)",
     }
 }
