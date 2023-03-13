@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Snackbar from "@mui/material/Snackbar";
 import { Box, Typography } from "@mui/material";
 import GppMaybeOutlinedIcon from "@mui/icons-material/GppMaybeOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
-import { openToast } from "store/Layout/layoutActions";
+import { headerAction } from "store/Header";
 
 const useStyles = () => ({
   toastRoot: {
@@ -42,30 +42,38 @@ const useStyles = () => ({
   toastBody: {
     padding: "0.75rem",
     wordWrap: "break-word",
+    lineHeight: 1.75,
   },
   toastTitle: {
-    fontFamily: "chakra",
+    fontFamily: "chakra_bold",
     marginRight: "auto",
+    lineHeight: 1,
   },
   toastClose: {
     cursor: "pointer",
   },
+  success: {
+    color: "#3cd2a5"
+  },
+  error: {
+    color: "#f44336"
+  }
 });
 
 export default function CustomizedSnackbars() {
   const classes = useStyles();
-  const open = useSelector((state) => state.layout.openToast);
-  const data = useSelector((state) => state.layout.toastData);
+  const open = useSelector((state) => state.header.openToast);
+  const data = useSelector((state) => state.header.toastData);
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    dispatch(openToast({ IsOpen: false }));
+    dispatch(headerAction.openToast({ IsOpen: false }));
   };
   return (
     <Snackbar
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       open={open}
-      autoHideDuration={2000}
+      autoHideDuration={200000}
       onClose={handleClose}
     >
       <Box component="div" sx={classes.toastRoot}>
@@ -73,10 +81,10 @@ export default function CustomizedSnackbars() {
           <Box component="div" sx={classes.toastHeader}>
             {data.type && <TIcon type={data.type} />}
             &nbsp;
-            <Typography sx={classes.toastTitle}>
+            <Typography variant="subtitle1" sx={[classes.toastTitle, data.type === 'success' ? classes.success : classes.error]}>
               {data && data.title}
             </Typography>
-            <CloseIcon onClick={handleClose} sx={classes.toastClose} />
+            <CloseIcon fontSize="small" onClick={handleClose} sx={classes.toastClose} />
           </Box>
           <Box component="div" sx={classes.toastBody}>
             {data && data.comment}
@@ -90,9 +98,9 @@ export default function CustomizedSnackbars() {
 const TIcon = (props) => {
   var icon = <></>;
   if (props.type === "success") {
-    icon = <CheckCircleOutlinedIcon color="success" />;
+    icon = <CheckCircleOutlinedIcon fontSize="small" color="success" />;
   } else if (props.type === "error") {
-    icon = <GppMaybeOutlinedIcon color="error" />;
+    icon = <GppMaybeOutlinedIcon fontSize="small" color="error" />;
   }
   return icon;
 };

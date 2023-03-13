@@ -1,4 +1,5 @@
-import types from './authTypes';
+import types from "./authTypes";
+import { headerTypes } from "store/Header";
 
 export const logInStart = (credentials) => ({
   type: types.LOGIN_START,
@@ -11,7 +12,7 @@ export const logInSuccess = (user) => ({
 });
 
 export const logInFailure = (error) => ({
-  type: types.LOGIN_FAILURE,
+  type: headerTypes.NEW_ERROR,
   payload: error,
 });
 
@@ -26,7 +27,7 @@ export const registerSuccess = (user) => ({
 });
 
 export const registerFailure = (error) => ({
-  type: types.REGISTER_FAILURE,
+  type: headerTypes.NEW_ERROR,
   payload: error,
 });
 
@@ -35,9 +36,5 @@ export const logOut = () => ({
 });
 
 export const clearError = () => ({
-  type: types.CLEAR_ERROR,
+  type: headerTypes.CLEAR_ERROR,
 });
-
-export const getUserInfo = () =>({
-  type: types.GET_USER_START
-})

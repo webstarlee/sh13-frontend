@@ -1,17 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import 'styles/index.css';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import React from "react";
+import axios from "axios";
+import { Provider } from "react-redux";
+import ReactDOM from "react-dom/client";
+import store from "./store";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import "styles/index.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+window.axios = axios;
+const token = window.sessionStorage.getItem("access_token");
+window.axios.defaults.headers.common['x-access-token'] = token;
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 

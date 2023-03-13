@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Typography, Link } from "@mui/material";
 import { SHInput, SHDivider, SHButton, SHCard } from "components";
-import { logInStart, clearError } from "store/Auth/authActions";
-import { openToast } from "store/Layout/layoutActions";
+import { logInStart } from "store/Auth/authActions";
+import { headerAction } from "store/Header";
 
 const useStyles = () => ({
   root: {
@@ -18,27 +18,15 @@ export default function Login() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const error = useSelector((state) => state.auth.error);
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   }
 
-  useEffect(() => {
-    if (error) {
-      const err = Object.values(error)[0];
-      dispatch(
-        openToast({ IsOpen: true, title: "Error", type: "error", comment: err })
-      );
-      dispatch(clearError());
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error]);
-
   const handleClick = () => {
     if (!credentials.username) {
       dispatch(
-        openToast({
+        headerAction.openToast({
           IsOpen: true,
           title: "Error",
           type: "error",
@@ -49,7 +37,7 @@ export default function Login() {
     }
     if (!credentials.password) {
       dispatch(
-        openToast({
+        headerAction.openToast({
           IsOpen: true,
           title: "Error",
           type: "error",

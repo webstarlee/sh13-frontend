@@ -21,14 +21,14 @@ const useStyles = () => ({
 function AuthLayout() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.currentUser);
+  const user = useSelector((state) => state.auth.user);
   const accessToken = window.sessionStorage.getItem("access_token");
   useEffect(() => {
-    if (currentUser && currentUser.username) {
+    if (user && user.username) {
       navigate("/home", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser]);
+  }, [user]);
 
   if (accessToken) {
     return <Navigate to="/home" replace />;

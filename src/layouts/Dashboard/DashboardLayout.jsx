@@ -1,11 +1,10 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate, Navigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import Header from "./Header";
-import Sidebar from "./Sidebar";
-import { getUserInfo } from "store/Auth/authActions";
+import { Header, Sidebar } from "./components";
+import { headerAction } from "store/Header";
 
 const useStyles = () => {
   const theme = useTheme();
@@ -38,7 +37,8 @@ const useStyles = () => {
 function DashboardLayout() {
   const classes = useStyles();
   const navigate = useNavigate();
-  const currentUser = useSelector((state) => state.auth.currentUser);
+  const profile = useSelector((state) => state.header.profile);
+  const accessToken = window.sessionStorage.getItem("access_token");
   const [extended, setExtended] = useState(true);
   const calledOnce = React.useRef(false);
   const dispatch = useDispatch();
@@ -48,28 +48,21 @@ function DashboardLayout() {
       return;
     }
 
-    return () => {
-      console.log("C")
-      const accessToken = window.sessionStorage.getItem("access_token");
-      if (!accessToken) {
-        navigate("/auth/login", { replace: true });
-      } else {
-        if (currentUser === null) {
-          dispatch(getUserInfo());
-          calledOnce.current = true;
-        }
-      }
+    if (accessToken && profile === null) {
+      dispatch(headerAction.getUserInfo(accessToken));
+      calledOnce.current = true;
     }
-  }, [currentUser]);
+  }, [profile]);
 
   useEffect(() => {
-    console.log("B")
-    const accessToken = window.sessionStorage.getItem("access_token");
-    if (!accessToken && currentUser === null) {
-      console.log("D");
+    if (!accessToken && profile === null) {
       navigate("/auth/login", { replace: true });
     }
-  }, [currentUser]);
+  }, [profile]);
+
+  if (!accessToken) {
+    return <Navigate to="/auth/login" replace />;
+  }
 
   const handleExtended = () => {
     setExtended(!extended);

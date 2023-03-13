@@ -1,39 +1,27 @@
 import types from "./authTypes";
 
 const INITIAL_STATE = {
-  currentUser: null,
-  error: null,
+  user: null,
+  loading: false,
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case types.LOGIN_START:
+      return {
+        ...state,
+        loading: true,
+      };
     case types.LOGIN_SUCCESS:
-      console.log(action);
       window.sessionStorage.setItem("access_token", action.payload.accessToken);
       return {
         ...state,
-        currentUser: action.payload.user,
-        error: null,
-      };
-    case types.LOGIN_FAILURE:
-    case types.REGISTER_FAILURE:
-      return {
-        ...state,
-        error: action.payload.response.data,
+        user: action.payload.user,
+        loading: false,
       };
     case types.LOG_OUT:
       window.sessionStorage.clear();
       return INITIAL_STATE;
-    case types.CLEAR_ERROR:
-      return {
-        ...state,
-        error: null,
-      };
-    case types.GET_USER_SUCCESS:
-      return {
-        ...state,
-        currentUser: action.payload.data,
-      };
     default:
       return state;
   }

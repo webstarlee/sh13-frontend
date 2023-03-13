@@ -1,20 +1,40 @@
-import React from "react";
-import { Provider } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from "@mui/material/styles";
 import { router } from "routes";
 import { theme } from "theme";
-import store from "./store";
-import Toast from "components/SHToast";
+import { SHToast } from "components";
+import { headerAction } from "store/Header";
 
 function App() {
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.header.error);
+
+  useEffect(() => {
+    if (error) {
+      const err = Object.values(error)[0];
+      const data = {
+        IsOpen: true,
+        title: "Error",
+        type: "error",
+        comment: err 
+      };
+      dispatch(headerAction.openToast(data));
+      dispatch(headerAction.clearError());
+    }
+  }, [error]);
+
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme} >
-        <RouterProvider router={router} fallbackElement={<div style={{height: "100vh", width: "100%"}}>asdfasdf</div>}/>
-        <Toast />
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <RouterProvider
+        router={router}
+        fallbackElement={
+          <div style={{ height: "100vh", width: "100%" }}>asdfasdf</div>
+        }
+      />
+      <SHToast />
+    </ThemeProvider>
   );
 }
 

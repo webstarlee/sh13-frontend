@@ -1,20 +1,24 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
 import {
-  logInFailure,
   logInSuccess,
-  registerFailure,
   registerSuccess,
 } from "./authActions";
+
+import {
+  headerAction
+} from "store/Header";
+
 import types from "./authTypes";
-import { logIn, register, getUserApi } from "./authApis";
+import { logIn, register } from "./authApis";
+import { Navigate } from "react-router-dom";
 
 export function* logInWithCredentials({ payload: { username, password } }) {
   try {
     const user = yield logIn(username, password);
     yield put(logInSuccess(user));
   } catch (error) {
-    yield put(logInFailure(error));
+    yield put(headerAction.newError(error));
   }
 }
 
@@ -25,19 +29,12 @@ export function* registerWithCredentials({
     yield register(fullname, username, password, confirmPassword);
     yield put(registerSuccess({ username, password }));
   } catch (error) {
-    yield put(registerFailure(error));
+    yield put(headerAction.newError(error));
   }
 }
 
-export function* getUser() {
-  try {
-    const user = yield getUserApi();
-    yield put({ type: types.GET_USER_SUCCESS, payload: user });
-  } catch (error) {}
-}
-
-export function* logInAfterRegister({ payload: { username, password } }) {
-  yield logInWithCredentials({ payload: { username, password } });
+export function* gologInAfterRegister() {
+  yield call(GotoForward, "/auth/login");
 }
 
 export function* onLogInStart() {
@@ -49,18 +46,17 @@ export function* onRegisterStart() {
 }
 
 export function* onRegisterSuccess() {
-  yield takeLatest(types.REGISTER_SUCCESS, logInAfterRegister);
+  yield takeLatest(types.REGISTER_SUCCESS, gologInAfterRegister);
 }
 
-export function* onGetUserStart() {
-  yield takeLatest(types.GET_USER_START, getUser);
+function GotoForward(path) {
+  window.location.replace(path);
 }
 
 export function* authSagas() {
   yield all([
     call(onLogInStart),
     call(onRegisterStart),
-    call(onRegisterSuccess),
-    call(onGetUserStart)
+    call(onRegisterSuccess)
   ]);
 }

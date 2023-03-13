@@ -1,0 +1,9 @@
+const headerTypes = {
+  NEW_ERROR: "NEW_ERROR",
+  CLEAR_ERROR: "CLEAR_ERROR",
+  OPEN_TOAST: "OPEN_TOAST",
+  GET_USER_START: "GET_USER_START",
+  GET_USER_SUCCESS: "GET_USER_SUCCESS"
+};
+
+export default headerTypes;
