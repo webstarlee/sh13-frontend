@@ -19,13 +19,14 @@ const useStyles = () => {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2)
     },
     fullContent: {
       marginLeft: "210px",
       [theme.breakpoints.down("sm")]: {
         marginLeft: '-0px',
       },
-      paddingLeft: "0.1rem",
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
