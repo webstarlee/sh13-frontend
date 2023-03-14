@@ -137,12 +137,10 @@ export default function Setting() {
                       <Box component="div">
                         <SHButton
                           onClick={() => setFullnameModal(true)}
-                          variant="contained"
-                          color="grey"
+                          variant="outlined"
                           size="small"
-                        >
-                          Edit
-                        </SHButton>
+                          title="Edit"
+                          />
                       </Box>
                     </ListItem>
                     <ListItem sx={classes.listItem}>
@@ -157,12 +155,10 @@ export default function Setting() {
                       <Box component="div">
                         <SHButton
                           onClick={() => setUsernameModal(true)}
-                          variant="contained"
-                          color="grey"
+                          variant="outlined"
                           size="small"
-                        >
-                          Edit
-                        </SHButton>
+                          title="Edit"
+                        />
                       </Box>
                     </ListItem>
                     <ListItem sx={classes.listItem}>
@@ -173,13 +169,11 @@ export default function Setting() {
                       </Box>
                       <Box component="div">
                         <SHButton
-                          variant="contained"
-                          color="grey"
+                          variant="outlined"
                           size="small"
+                          title="Edit"
                           onClick={() => setPasswordModal(true)}
-                        >
-                          Edit
-                        </SHButton>
+                        />
                       </Box>
                     </ListItem>
                   </List>
@@ -205,10 +199,11 @@ export default function Setting() {
           value={fullname}
           onChange={(e) => setFullname(e.target.value)}
         />
-
-        <SHButton onClick={changeFullname} sx={{ my: 1 }} variant="contained">
-          Change
-        </SHButton>
+        <SHButton
+          onClick={changeFullname}
+          variant="outlined"
+          title="Change"
+          />
       </SHModal>
       <SHModal
         header="Username Change"
