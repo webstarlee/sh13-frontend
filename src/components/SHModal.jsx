@@ -2,10 +2,10 @@ import React from "react";
 import {
   Box,
   Modal,
-  Typography
+  Typography,
+  Fade,
 } from "@mui/material";
 import { useTheme } from '@mui/material/styles';
-import CloseIcon from "@mui/icons-material/Close";
 import { SHCardBorder } from 'components';
 
 const useStyles = () => {
@@ -157,22 +157,25 @@ export default function SHModal(props) {
       onClose={onclose}
       sx={classes.modal}
     >
+      <Fade in={open}>
       <Box component="div"
         sx={cover ? classes.modalCover : [classes.modalDialog, width]}
       >
-        <Box component="div" sx={ cover ? classes.coverContent : classes.modalContent }>
-          <Box component="div" sx={classes.modalHeader}>
-            <Typography sx={classes.modalTitle}>
-              {header}
-            </Typography>
-            <CloseIcon sx={classes.closeBtn} onClick={onclose} />
-          </Box>
+        <Box component="div" sx={cover ? classes.coverContent : classes.modalContent}>
+          {header ?
+            <Box component="div" sx={classes.modalHeader}>
+              <Typography sx={classes.modalTitle}>
+                {header}
+              </Typography>
+            </Box> : ''
+          }
           <Box component="div" sx={classes.modalBody}>
             {children}
           </Box>
         </Box>
-        <SHCardBorder />
+        {cover? "": <SHCardBorder />}
       </Box>
+      </Fade>
     </Modal >
   );
 }

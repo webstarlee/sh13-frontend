@@ -7,6 +7,7 @@ const useStyles = () => {
   return {
     buttonBase: {
       borderRadius: "0px",
+      fontFamily: 'chakra',
       "&.MuiButton-outlinedPrimary": {
         "&:hover": {
           backgroundColor: theme.palette.primary.main,
