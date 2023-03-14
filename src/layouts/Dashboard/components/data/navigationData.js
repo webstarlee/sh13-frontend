@@ -8,7 +8,7 @@ export const mainNavigation = [
   {
     name: "Dashboard",
     icon: Dashboard,
-    url: `/dashboard`,
+    url: `/home`,
   },
   {
     name: "Posts",

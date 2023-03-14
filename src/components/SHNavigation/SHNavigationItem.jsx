@@ -32,7 +32,7 @@ const useStyles = () => {
       "& .MuiTypography-root": {
         fontSize: "14px",
       },
-      "& :hover" : {
+      "& :hover": {
         color: theme.palette.common.white,
       }
     },
@@ -81,7 +81,7 @@ const useStyles = () => {
       backgroundColor: lighten(theme.palette.secondary.main, 0.1),
     },
     selected: {
-      backgroundColor: lighten(theme.palette.secondary.main, 0.3),
+      color: theme.palette.primary.main,
     },
   })
 };
@@ -102,17 +102,13 @@ const NavigationItem = ({ item, collapsed }) => {
   React.useEffect(() => {
     if (pathname.search(new RegExp(item.url, "g")) !== -1) {
       setOpen(true);
+      console.log("opened")
     }
   }, [pathname, item.url]);
   return (
-    <div
-      className={clsx(
-        classes.root,
-        nested && open && classes.expanded,
-        pathname.search(new RegExp(item.url, "g")) !== -1 &&
-        !nested &&
-        classes.selected
-      )}>
+    <Box
+      component='div'
+      sx={classes.root}>
       <ListItem
         sx={classes.listItem}
         onClick={handleClick}
@@ -123,15 +119,31 @@ const NavigationItem = ({ item, collapsed }) => {
           sx={[
             classes.listLink
           ]}>
-          <ListItemIcon sx={ nested && open ? classes.listIconActive: classes.listIcon }>
+          <ListItemIcon sx={[
+            nested && open ? classes.listIconActive : classes.listIcon,
+            pathname.search(new RegExp(item.url, "g")) !== -1 &&
+            !nested &&
+            classes.selected
+          ]}>
             {(item.icon && <item.icon />) || ""}
           </ListItemIcon>
           {
             !item.icon ?
-              <ListItemText sx={classes.hiddenStyle}>
+              <ListItemText sx={[
+                classes.hiddenStyle,
+                pathname.search(new RegExp(item.url, "g")) !== -1 &&
+                !nested &&
+                classes.selected
+              ]}>
                 {item.name}
               </ListItemText>
-              : <ListItemText sx={classes.listText}>
+              : <ListItemText
+                  sx={[
+                    classes.listText,
+                    pathname.search(new RegExp(item.url, "g")) !== -1 &&
+                    !nested &&
+                    classes.selected
+                  ]}>
                 {item.name}
               </ListItemText>
           }
@@ -163,7 +175,7 @@ const NavigationItem = ({ item, collapsed }) => {
           </Collapse>
         )
       }
-    </div >
+    </Box >
   );
 };
 
