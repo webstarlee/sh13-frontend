@@ -6,7 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
+import { LocalizationProvider, MobileDatePicker  } from '@mui/x-date-pickers';
 import { SHModal, SHTable } from "components";
 
 export default function Home() {
@@ -80,9 +80,11 @@ export default function Home() {
         </div>
         <div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
+            <MobileDatePicker
               label="Example date"
               value={value}
+              closeOnSelect={true}
+              orientation="landscape"
               onChange={(newValue) => {
                 setValue(newValue);
               }}
