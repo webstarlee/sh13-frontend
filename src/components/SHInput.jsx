@@ -19,6 +19,14 @@ const useStyles = () =>({
       height: "42px",
       "&>input": {
         backgroundColor: "rgba(255,255,255, 0.05)!important",
+        "&:-webkit-autofill": {
+          backgroundColor: "rgba(255,255,255, 0.05)!important",
+          "&:hover, &:focus, &:active": {
+            WebkitBoxShadow: "0 0 3px 2px rgba(255,255,255, 0.25)",
+            boxShadow: "unset",
+            WebkitTextFillColor: "rgba(0,0,0,0.9)",
+          }
+        },
         "&:focus": {
           boxShadow: "0 0 3px 2px rgba(255,255,255, 0.25)",
           transition: "boxShadow ease-out 0.2s"
@@ -52,8 +60,10 @@ export default function LeeInput(props) {
         type={type}
         focused
         color={color}
+        autoComplete="chrome-off"
         InputProps={{
           sx: classes.input,
+          autoComplete: "off",
         }}
         {...rest}
       />

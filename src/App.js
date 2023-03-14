@@ -23,7 +23,7 @@ function App() {
       dispatch(headerAction.openToast(data));
       dispatch(headerAction.clearError());
     }
-  }, [error]);
+  }, [error, dispatch]);
 
   return (
     <ThemeProvider theme={theme}>

@@ -11,7 +11,6 @@ import {
 
 import types from "./authTypes";
 import { logIn, register } from "./authApis";
-import { Navigate } from "react-router-dom";
 
 export function* logInWithCredentials({ payload: { username, password } }) {
   try {

@@ -40,7 +40,7 @@ function DashboardLayout() {
   const profile = useSelector((state) => state.header.profile);
   const accessToken = window.sessionStorage.getItem("access_token");
   const [extended, setExtended] = useState(true);
-  const calledOnce = React.useRef(false);
+  const calledOnce = useRef(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -52,13 +52,13 @@ function DashboardLayout() {
       dispatch(headerAction.getUserInfo(accessToken));
       calledOnce.current = true;
     }
-  }, [profile]);
+  }, [dispatch, profile, accessToken]);
 
   useEffect(() => {
     if (!accessToken && profile === null) {
       navigate("/auth/login", { replace: true });
     }
-  }, [profile]);
+  }, [profile, accessToken, navigate]);
 
   if (!accessToken) {
     return <Navigate to="/auth/login" replace />;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import {
   AppBar,
@@ -215,7 +215,6 @@ export default function Header(props) {
   const {sidebarHandle} = props;
   const classes = useStyles();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => {
