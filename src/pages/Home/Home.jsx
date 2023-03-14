@@ -7,15 +7,45 @@ import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { SHModal } from "components";
+import { SHModal, SHTable } from "components";
 
 export default function Home() {
   const [value, setValue] = useState(null);
 
   const [open, setOpen] = React.useState(false);
+  const [tableHead, setTableHead] = React.useState([
+    { id: 'name', label: 'Name' },
+    { id: 'code', label: 'ISO\u00a0Code'},
+    {
+      id: 'population',
+      label: 'Population',
+      align: 'right',
+      format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+      id: 'size',
+      label: 'Size\u00a0(km\u00b2)',
+      align: 'right',
+      format: (value) => value.toLocaleString('en-US'),
+    },
+    {
+      id: 'density',
+      label: 'Density',
+      align: 'right',
+      format: (value) => value.toFixed(2),
+    },
+  ]);
+  const [tableBody, setTableBody] = React.useState([
+    ['ace', 'Hallin Ace', 1920192, 102841, 10303.92],
+    ['sd', 'Hallin Ace', 1920192, 102841, 10303.92],
+    ['fa', 'Hallin Ace', 1920192, 102841, 10303.92],
+    ['d', 'Hallin Ace', 1920192, 102841, 10303.92],
+    ['acsde', 'Hallin Ace', 1920192, 102841, 10303.92],
+    ['ac1e', 'Hallin Ace', 1920192, 102841, 10303.92],
+  ]);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  
   return (
     <Box
       component="form"
@@ -72,6 +102,11 @@ export default function Home() {
           >
             ... This is SHModal Test ...
           </SHModal>
+          <SHTable
+            THeadData={tableHead}
+            TBodyData={tableBody}
+          >
+          </SHTable>
         </div>
       </Container>
     </Box>
