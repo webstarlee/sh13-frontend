@@ -1,13 +1,14 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import types from "./profileTypes";
+import types from "store/Profile/profileTypes";
+import { headerTypes } from "store/Header";
 import { headerAction } from "store/Header";
 import { changeFullname, changeUsername, changePassword } from "./profileApis";
 
 export function* changeFullnameSaga(data) {
   try {
     const user = yield changeFullname(data.payload);
-    console.log(user);
-    // yield put({ type: types.GET_USER_SUCCESS, payload: user });
+    yield put({ type: headerTypes.NEW_SUCCESS, payload: user.message });
+    yield put(headerAction.getUserInfo());
   } catch (error) {
     yield put(headerAction.newError(error));
   }
@@ -16,7 +17,8 @@ export function* changeFullnameSaga(data) {
 export function* changeUsernameSaga(data) {
   try {
     const user = yield changeUsername(data.payload);
-    // yield put({ type: types.GET_USER_SUCCESS, payload: user });
+    yield put({ type: headerTypes.NEW_SUCCESS, payload: user.message });
+    yield put(headerAction.getUserInfo());
   } catch (error) {
     yield put(headerAction.newError(error));
   }
@@ -25,7 +27,8 @@ export function* changeUsernameSaga(data) {
 export function* changePasswordSaga(data) {
   try {
     const user = yield changePassword(data.payload);
-    // yield put({ type: types.GET_USER_SUCCESS, payload: user });
+    yield put({ type: headerTypes.NEW_SUCCESS, payload: user.message });
+    yield put(headerAction.getUserInfo());
   } catch (error) {
     yield put(headerAction.newError(error));
   }
@@ -41,7 +44,7 @@ export function* onChangePasswordStart() {
   yield takeLatest(types.CHANGE_PASSWORD, changePasswordSaga);
 }
 
-export default function* headerSagas() {
+export default function* projectSagas() {
   yield all([
     call(onChangeFullnameStart),
     call(onChangeUsernameStart),

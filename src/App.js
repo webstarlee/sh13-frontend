@@ -10,6 +10,7 @@ import { headerAction } from "store/Header";
 function App() {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.header.error);
+  const message = useSelector((state) => state.header.message);
 
   useEffect(() => {
     if (error) {
@@ -18,12 +19,25 @@ function App() {
         IsOpen: true,
         title: "Error",
         type: "error",
-        comment: err 
+        comment: err,
       };
       dispatch(headerAction.openToast(data));
       dispatch(headerAction.clearError());
     }
   }, [error, dispatch]);
+
+  useEffect(() => {
+    if (message) {
+      const data = {
+        IsOpen: true,
+        title: "Success",
+        type: "success",
+        comment: message,
+      };
+      dispatch(headerAction.openToast(data));
+      dispatch(headerAction.clearSuccess());
+    }
+  }, [message, dispatch]);
 
   return (
     <ThemeProvider theme={theme}>

@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { SHCard, SHButton, SHModal, SHInput, SHDivider } from "components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Grid,
@@ -12,11 +12,13 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { PersonOutlineOutlined } from "@mui/icons-material";
 import { headerAction } from "store/Header";
+import { profileAction } from "store/Profile";
 
 export default function Setting() {
   const classes = useStyle();
-  const theme =  useTheme();
+  const theme = useTheme();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.header.profile);
   const [fullnameModal, setFullnameModal] = useState(false);
   const [usernameModal, setUsernameModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
@@ -39,6 +41,8 @@ export default function Setting() {
       );
       return;
     }
+    dispatch(profileAction.changeFullname({ fullname: fullname }));
+    setFullnameModal(false);
   };
   const changeUsername = () => {
     if (!username) {
@@ -52,8 +56,52 @@ export default function Setting() {
       );
       return;
     }
+    dispatch(profileAction.changeUsername({ username: username }));
+    setUsernameModal(false);
   };
-  const changePassword = () => {};
+  const changePwd = () => {
+    if (!oldPassword) {
+      dispatch(
+        headerAction.openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "old password is rquired!",
+        })
+      );
+      return;
+    }
+    if (!password) {
+      dispatch(
+        headerAction.openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "password is rquired!",
+        })
+      );
+      return;
+    }
+    if (!confirmPassword) {
+      dispatch(
+        headerAction.openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "Confirm Passwordis rquired!",
+        })
+      );
+      return;
+    }
+    dispatch(
+      profileAction.changePassword({
+        oldPassword: oldPassword,
+        password: password,
+        confirmPassword: confirmPassword,
+      })
+    );
+    setPasswordModal(false);
+  };
 
   return (
     <Fragment>
@@ -82,7 +130,9 @@ export default function Setting() {
                         <Typography variant="p" sx={classes.normalTypo}>
                           {"Fullname"}
                         </Typography>
-                        <Typography sx={classes.greyTypo}>{"Name"}</Typography>
+                        <Typography sx={classes.greyTypo}>
+                          {user && user.fullname}
+                        </Typography>
                       </Box>
                       <Box component="div">
                         <SHButton
@@ -100,7 +150,9 @@ export default function Setting() {
                         <Typography variant="p" sx={classes.normalTypo}>
                           {"Username"}
                         </Typography>
-                        <Typography sx={classes.greyTypo}>{"Name"}</Typography>
+                        <Typography sx={classes.greyTypo}>
+                          {user && user.username}
+                        </Typography>
                       </Box>
                       <Box component="div">
                         <SHButton
@@ -189,6 +241,7 @@ export default function Setting() {
           id="oldpassword"
           color="secondary"
           name="oldPassword"
+          type="password"
           value={oldPassword}
           onChange={(e) => setOldPassword(e.target.value)}
         />
@@ -200,6 +253,7 @@ export default function Setting() {
           id="password"
           color="secondary"
           name="password"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
@@ -210,11 +264,12 @@ export default function Setting() {
           label="Confirm Password"
           id="ConfirmPassword"
           color="secondary"
+          type="password"
           name="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <SHButton onClick={changePassword} sx={{ my: 1 }} variant="contained">
+        <SHButton onClick={changePwd} sx={{ my: 1 }} variant="contained">
           Change
         </SHButton>
       </SHModal>

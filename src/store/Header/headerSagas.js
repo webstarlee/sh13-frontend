@@ -3,9 +3,9 @@ import types from "./headerTypes";
 import { headerAction } from "store/Header";
 import { getUserApi } from "./headerApis";
 
-export function* getUser(data) {
+export function* getUser() {
   try {
-    const user = yield getUserApi(data.payload);
+    const user = yield getUserApi();
     yield put({ type: types.GET_USER_SUCCESS, payload: user });
   } catch (error) {
     yield put(headerAction.newError(error));
