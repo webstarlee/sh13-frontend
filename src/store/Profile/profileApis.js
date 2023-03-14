@@ -2,7 +2,7 @@ import { API_URL } from "constants";
 
 const changeFullname = async (data) => {
   const response = await window.axios.post(
-    `${API_URL}/profile/changeFullname`,
+    `${API_URL}/profile/change/fullname`,
     data
   );
   return response.data;
@@ -10,7 +10,7 @@ const changeFullname = async (data) => {
 
 const changeUsername = async (data) => {
   const response = await window.axios.post(
-    `${API_URL}/profile/changeUsername`,
+    `${API_URL}/profile/change/username`,
     data
   );
   return response.data;
@@ -18,7 +18,7 @@ const changeUsername = async (data) => {
 
 const changePassword = async (data) => {
   const response = await window.axios.post(
-    `${API_URL}/profile/changePassword`,
+    `${API_URL}/profile/change/password`,
     data
   );
   return response.data;
