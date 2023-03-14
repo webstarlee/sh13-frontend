@@ -147,7 +147,7 @@ const useStyles = () => {
   })
 };
 
-export default function LeeCard(props) {
+export default function SHCard(props) {
   const { component, autoComplete, children } = props;
 
   const classes = useStyles();

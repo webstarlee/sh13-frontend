@@ -17,7 +17,7 @@ const useStyles = () => {
   })
 };
 
-export default function LeeButton(props) {
+export default function SHButton(props) {
   const { title = "Button", variant, size, fullWidth, ...rest } = props;
 
   const classes = useStyles();

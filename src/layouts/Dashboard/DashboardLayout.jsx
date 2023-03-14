@@ -14,13 +14,15 @@ const useStyles = () => {
       backgroundImage: "unset",
     },
     content: {
-      paddingTop: "52px",
+      height: "calc(100vh - 52px)",
+      overflow: "auto",
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
       paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2)
+      paddingRight: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
     },
     fullContent: {
       marginLeft: "210px",

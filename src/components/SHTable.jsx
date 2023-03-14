@@ -41,11 +41,13 @@ const useStyles = () => {
       borderBottom: `3px solid ${theme.palette.secondary.bold}`,
       fontWeight: 'bold',
       color: theme.palette.secondary.bold,
+      padding: theme.spacing(1.5)
     },
     tablebodyCell: {
       color: theme.palette.secondary.bold,
       borderColor: 'inherit',
       borderRight: `1px solid ${theme.palette.secondary.main}`,
+      padding: theme.spacing(1.5)
     },
     cardArrow: {
       position: "absolute",
@@ -161,10 +163,10 @@ const useStyles = () => {
 export default function SHTable(props) {
 
   const classes = useStyles();
-  const { THeadData, TBodyData } = props;
+  const { THeadData, TBodyData, stickyHeader=false } = props;
 
   return (
-    <Table stickyHeader sx={classes.paper}  aria-label="sticky table" >
+    <Table stickyHeader={stickyHeader} sx={classes.paper}  aria-label="sticky table" >
       <TableHead sx={classes.tableHead}>
         <TableRow sx={classes.tableRow}>
           {THeadData.map((column, index) => (
@@ -182,7 +184,7 @@ export default function SHTable(props) {
       <TableBody>
         {TBodyData.map((row, val) => {
           return (
-            <TableRow hover role="checkbox" tabIndex={-1} key={val} sx={classes.tablerow}>
+            <TableRow hover role="checkbox" tabIndex={-1} key={val} sx={classes.tableRow}>
               {THeadData.map((column, index) => {
                 const value = row[index];
                 return (

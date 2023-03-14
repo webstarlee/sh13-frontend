@@ -8,3 +8,4 @@ export { default as SHModal} from "./SHModal";
 export { SHNavigation} from "./SHNavigation";
 export { default as SHTable } from "./SHTable";
 export { default as SHTab } from "./SHTab";
+export { default as SHDatePicker } from "./SHDatePicker";
