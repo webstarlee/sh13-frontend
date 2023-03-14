@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import dayjs from 'dayjs';
 import { LocalizationProvider, StaticDatePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { SHInput, SHModal } from 'components';
+import { useTheme } from '@mui/material/styles';
+import { SHInput, SHModal, SHCardBorder } from 'components';
 import {
   usePickerLayout,
   pickersLayoutClasses,
@@ -17,6 +18,7 @@ const useStyles = () => ({
 });
 
 function CustomLayout(props) {
+  const theme = useTheme();
   const { toolbar, tabs, content, actionBar } = usePickerLayout(props);
 
   return (
@@ -25,27 +27,44 @@ function CustomLayout(props) {
       sx={{
         overflow: 'auto',
         [`.${pickersLayoutClasses.actionBar}`]: {
-          gridColumn: 1,
-          gridRow: 2,
-        },
-        [`.${pickersLayoutClasses.toolbar}`]: {
           gridColumn: 2,
           gridRow: 1,
         },
       }}
     >
-      {toolbar}
       <PickersLayoutContentWrapper
-        
         sx={{
-          [`.${pickersLayoutClasses.contentWrapper}`]: {
-            minHeight: "200px"
+          position: "relative",
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            left: "15px",
+            right: "15px",
+            top: 0,
+            bottom: 0,
+            borderTop: `1px solid ${theme.palette.common.white}`,
+            borderBottom: `1px solid ${theme.palette.common.white}`,
+            opacity: "0.3",
+            zIndex: -1,
+          },
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: "15px",
+            bottom: "15px",
+            left: 0,
+            right: 0,
+            borderRight: `1px solid ${theme.palette.common.white}`,
+            borderLeft: `1px solid ${theme.palette.common.white}`,
+            opacity: "0.3",
+            zIndex: -1,
           }
         }}
-        >
+        className={pickersLayoutClasses.contentWrapper}>
         {tabs}
         {content}
         {actionBar}
+        <SHCardBorder />
       </PickersLayoutContentWrapper>
     </PickersLayoutRoot>
   );
