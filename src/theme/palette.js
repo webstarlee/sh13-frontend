@@ -5,7 +5,8 @@ export const palette = {
         black: '#000'
     },
     primary: {
-        main: "#3cd2a5"
+        main: "#3cd2a5",
+        dark: "#3cb2a5"
     },
     secondary: {
         light: "rgba(255,255,255,.15)",

@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { AuthLayout, DashboadLayout } from "layouts";
-import { Home, Login, Register } from "pages";
+import { Home, Login, Register, Profile } from "pages";
 
 export const routes = createBrowserRouter([
   {
@@ -14,6 +14,10 @@ export const routes = createBrowserRouter([
       {
         path: "home",
         element: <Home />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
