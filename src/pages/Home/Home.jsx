@@ -5,9 +5,9 @@ import Container from "@mui/material/Container";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
-import { SHModal } from "components";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { SHModal, SHTab, SHCard } from "components";
 
 export default function Home() {
   const [value, setValue] = useState(null);
@@ -15,7 +15,16 @@ export default function Home() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const tabHeader = [
+    { label: "First" },
+    { label: "Second" },
+    { label: "Third" },
+  ];
+  const tabContent = [
+    <SHCard>first</SHCard>,
+    <SHCard>second</SHCard>,
+    <SHCard>third</SHCard>,
+  ];
   return (
     <Box
       component="form"
@@ -73,6 +82,9 @@ export default function Home() {
             ... This is SHModal Test ...
           </SHModal>
         </div>
+        <SHCard>
+          <SHTab tabHeader={tabHeader} tabContent={tabContent} />
+        </SHCard>
       </Container>
     </Box>
   );

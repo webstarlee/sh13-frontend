@@ -20,7 +20,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -91,8 +91,8 @@ export default function SHTab(props) {
   const classes = useStyle();
   const theme = useTheme();
   return (
-    <Box sx={{ width: "100%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: theme.palette.grey[500] }}>
+    <Box component="div" sx={{ width: "100%" }}>
+      <Box component="div" sx={{ borderBottom: 1, borderColor: theme.palette.grey[500] }}>
         <StyledTabs
           classes={classes.root}
           value={value}
