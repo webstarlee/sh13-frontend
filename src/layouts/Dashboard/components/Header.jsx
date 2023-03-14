@@ -22,7 +22,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Logout from '@mui/icons-material/Logout';
 import { logOut } from 'store/Auth/authActions';
-
+import { useNavigate } from "react-router-dom";
 const useStyles = () => {
   const theme = useTheme();
   return {
@@ -214,9 +214,11 @@ const useStyles = () => {
 export default function Header(props) {
   const {sidebarHandle} = props;
   const classes = useStyles();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
 
+  
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -228,6 +230,10 @@ export default function Header(props) {
   const logout = () => {
     dispatch(logOut());
   };
+
+  const linkPage = (link) =>{
+    navigate(link)
+  }
 
   return (
     <AppBar
@@ -354,13 +360,13 @@ export default function Header(props) {
           transformOrigin={{ horizontal: 'right', vertical: 'top' }}
           anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={()=>linkPage("/profile")}>
             Profile
             <ListItemIcon sx={{justifyContent: 'flex-end'}}>
               <AccountCircleOutlinedIcon color="primary" fontSize="small" />
             </ListItemIcon>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem onClick={()=>linkPage("/setting")}>
             Setting
             <ListItemIcon sx={{justifyContent: 'flex-end'}}>
               <SettingsOutlinedIcon color="primary" fontSize="small" />

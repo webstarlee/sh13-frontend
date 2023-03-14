@@ -14,7 +14,10 @@ export const clearError = () => ({
   type: types.CLEAR_ERROR,
 });
 
-export const getUserInfo = (data) => ({
+export const clearSuccess = () => ({
+  type: types.CLEAR_SUCCESS,
+});
+
+export const getUserInfo = () => ({
   type: types.GET_USER_START,
-  payload: data
 });

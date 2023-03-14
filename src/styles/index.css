@@ -68,7 +68,7 @@ html:after {
 
 body {
   margin: 0;
-  font-family: "Chakra Petch",sans-serif;
+  /* font-family: "Chakra Petch",sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 300;
@@ -100,3 +100,6 @@ body:before {
   padding-top: 52px;
 }
 
+* {
+  font-family: "chakra";
+}

@@ -1,10 +1,10 @@
 import React from "react";
-import { useTheme } from '@mui/material/styles';
+import { useTheme } from "@mui/material/styles";
 import { Button } from "@mui/material";
 
 const useStyles = () => {
   const theme = useTheme();
-  return ({
+  return {
     buttonBase: {
       borderRadius: "0px",
       fontFamily: 'chakra',
@@ -15,11 +15,11 @@ const useStyles = () => {
         },
       },
     },
-  })
+  };
 };
 
-export default function SHButton(props) {
-  const { title = "Button", variant, size, fullWidth, ...rest } = props;
+export default function LeeButton(props) {
+  const { title, variant, size, fullWidth, children, ...rest } = props;
 
   const classes = useStyles();
 
@@ -31,7 +31,7 @@ export default function SHButton(props) {
       sx={classes.buttonBase}
       {...rest}
     >
-      {title}
+      {title ? title : children}
     </Button>
   );
 }

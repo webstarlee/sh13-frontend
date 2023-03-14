@@ -127,7 +127,7 @@ const useStyles = () => {
       justifyContent: 'center',
     },
     noneArrow: {
-      display: 'none',
+      display:'none',
     }
   })
 };
@@ -165,10 +165,10 @@ export default function SHModal(props) {
           {header ?
             <Box component="div" sx={classes.modalHeader}>
               <Typography sx={classes.modalTitle}>
-                {header}
               </Typography>
             </Box> : ''
           }
+                {header}
           <Box component="div" sx={classes.modalBody}>
             {children}
           </Box>

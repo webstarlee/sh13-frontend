@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   openToast: false,
   toastData: {},
   profile: null,
+  message: "",
 };
 
 const headerReducer = (state = INITIAL_STATE, action) => {
@@ -25,6 +26,16 @@ const headerReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: null,
+      };
+    case types.NEW_SUCCESS:
+      return {
+        ...state,
+        message: action.payload,
+      };
+    case types.CLEAR_SUCCESS:
+      return {
+        ...state,
+        message: "",
       };
     case types.GET_USER_SUCCESS:
       return {

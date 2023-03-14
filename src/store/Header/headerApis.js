@@ -1,9 +1,11 @@
 import { API_URL } from "constants";
 
-const getUserApi = async (token) => {
-  window.axios.defaults.headers.common['x-access-token'] = token;
+const getUserApi = async () => {
+  const token = window.sessionStorage.getItem("access_token");
+  window.axios.defaults.headers.common["x-access-token"] = token;
 
   const response = await window.axios.get(`${API_URL}/user/current`);
+  console.log(response.data)
   return response.data;
 };
 
