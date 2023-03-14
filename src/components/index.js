@@ -6,3 +6,4 @@ export { default as SHCard } from "./SHCard";
 export { default as SHToast } from "./SHToast";
 export { default as SHModal} from "./SHModal";
 export { SHNavigation} from "./SHNavigation";
+export { default as SHTab } from "./SHTab";
