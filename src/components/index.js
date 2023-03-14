@@ -1,3 +1,4 @@
+export { SHTitle } from "./SHTitle";
 export { default as SHInput } from "./SHInput";
 export { default as SHDivider } from "./SHDivider";
 export { default as SHButton } from "./SHButton";

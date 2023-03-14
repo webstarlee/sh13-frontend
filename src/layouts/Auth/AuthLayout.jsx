@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Outlet, useNavigate, Navigate } from "react-router-dom";
+import { Outlet, useNavigate, Navigate, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
+import { SHTitle } from "components";
 
 const useStyles = () => ({
   box: {
@@ -21,6 +22,7 @@ const useStyles = () => ({
 function AuthLayout() {
   const classes = useStyles();
   const navigate = useNavigate();
+  const location = useLocation();
   const user = useSelector((state) => state.auth.user);
   const accessToken = window.sessionStorage.getItem("access_token");
   useEffect(() => {
@@ -30,6 +32,8 @@ function AuthLayout() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+  console.log(location);
+
   if (accessToken) {
     return <Navigate to="/home" replace />;
   }
@@ -37,6 +41,7 @@ function AuthLayout() {
   return (
     <Box sx={classes.box}>
       <Box sx={classes.content}>
+        <SHTitle title="Login" />
         <Outlet />
       </Box>
     </Box>
