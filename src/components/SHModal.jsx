@@ -102,7 +102,6 @@ const useStyles = () => {
       cursor: 'pointer',
       boxSizing: 'content-box',
       position: 'relative',
-      zIndex: "2210",
       width: '1em',
       height: '1em',
       color: theme.palette.common.white,
