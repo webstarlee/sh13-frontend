@@ -5,7 +5,6 @@ const getUserApi = async () => {
   window.axios.defaults.headers.common["x-access-token"] = token;
 
   const response = await window.axios.get(`${API_URL}/user/current`);
-  console.log(response.data)
   return response.data;
 };
 

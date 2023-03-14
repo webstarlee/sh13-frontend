@@ -28,6 +28,12 @@ export default function Setting() {
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  useEffect(() => {
+    if (user) {
+      setFullname(user.fullname);
+      setUsername(user.username);
+    }
+  }, [user]);
 
   const changeFullname = () => {
     if (!fullname) {
@@ -140,7 +146,7 @@ export default function Setting() {
                           variant="outlined"
                           size="small"
                           title="Edit"
-                          />
+                        />
                       </Box>
                     </ListItem>
                     <ListItem sx={classes.listItem}>
@@ -199,11 +205,7 @@ export default function Setting() {
           value={fullname}
           onChange={(e) => setFullname(e.target.value)}
         />
-        <SHButton
-          onClick={changeFullname}
-          variant="outlined"
-          title="Change"
-          />
+        <SHButton onClick={changeFullname} variant="outlined" title="Change" />
       </SHModal>
       <SHModal
         header="Username Change"
@@ -220,9 +222,7 @@ export default function Setting() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <SHButton onClick={changeUsername} sx={{ my: 1 }} variant="contained">
-          Change
-        </SHButton>
+        <SHButton title="Change" onClick={changeUsername} variant="outlined" />
       </SHModal>
       <SHModal
         header="Password Change"
@@ -264,9 +264,7 @@ export default function Setting() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <SHButton onClick={changePwd} sx={{ my: 1 }} variant="contained">
-          Change
-        </SHButton>
+        <SHButton title="Change" onClick={changePwd} variant="outlined" />
       </SHModal>
     </Fragment>
   );
