@@ -1,17 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Container from "@mui/material/Container";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
-import { SHModal, SHTab, SHCard, SHTable } from "components";
-import { LocalizationProvider, MobileDatePicker  } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { SHModal, SHTab, SHCard, SHTable, SHDatePicker } from "components";
 
 export default function Home() {
-  const [value, setValue] = useState(null);
-
   const [open, setOpen] = React.useState(false);
   const [tableHead, setTableHead] = React.useState([
     { id: 'name', label: 'Name' },
@@ -86,21 +81,7 @@ export default function Home() {
           control={<Switch defaultChecked />}
           label="Example switch"
         />
-      </SHCard>
-      <SHCard>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <MobileDatePicker
-            label="Example date"
-            value={value}
-            closeOnSelect={true}
-            orientation="landscape"
-            onChange={(newValue) => {
-              setValue(newValue);
-            }}
-          />
-        </LocalizationProvider>
-      </SHCard>
-      <SHCard>
+        <SHDatePicker />
         <Button variant="contained" onClick={handleOpen}>
           Open modal
         </Button>
@@ -113,6 +94,8 @@ export default function Home() {
         >
           ... This is SHModal Test ...
         </SHModal>
+      </SHCard>
+      <SHCard>
         <SHTable
           THeadData={tableHead}
           TBodyData={tableBody}

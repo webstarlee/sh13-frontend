@@ -96,9 +96,8 @@ body:before {
   z-index: -5;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+#root {
+  padding-top: 52px;
 }
 
 * {

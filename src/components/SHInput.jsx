@@ -8,6 +8,7 @@ const useStyles = () =>({
       fontSize: "1.25rem",
       left: "-15px",
       top: "-20px",
+      display: 'none',
       "&.Mui-focused": {
         color: "rgba(255,255,255,.75)"
       }
@@ -44,9 +45,9 @@ const useStyles = () =>({
   }
 });
 
-export default function LeeInput(props) {
+export default function SHInput(props) {
 
-  const {size, fullWidth, label, color, id, type = "text", ...rest} = props;
+  const {size, fullWidth, label, color, id, type = "text", readOnly=false, ...rest} = props;
 
   const classes = useStyles();
 
@@ -60,10 +61,11 @@ export default function LeeInput(props) {
         type={type}
         focused
         color={color}
-        autoComplete="chrome-off"
+        autoComplete="off"
         InputProps={{
           sx: classes.input,
           autoComplete: "off",
+          readOnly: readOnly
         }}
         {...rest}
       />

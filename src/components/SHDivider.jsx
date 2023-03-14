@@ -13,7 +13,7 @@ const useStyles = () =>({
   },
 });
 
-export default function LeeDivider(props) {
+export default function SHDivider(props) {
 
   const {height = "medium"} = props;
 
