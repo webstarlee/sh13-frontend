@@ -148,7 +148,7 @@ const useStyles = () => {
 };
 
 export default function LeeCard(props) {
-  const { component, autoComplete, children } = props;
+  const { component, noPadding, autoComplete, children } = props;
 
   const classes = useStyles();
 
@@ -160,7 +160,7 @@ export default function LeeCard(props) {
       <Box
         component={component}
         autoComplete={autoComplete}
-        sx={classes.cardBody}
+        sx={[classes.cardBody, noPadding && {p: 0}]}
       >
         {children}
       </Box>
