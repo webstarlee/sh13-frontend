@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
-import { SHModal, SHTab, SHCard, SHTable, SHDatePicker } from "components";
+import { SHModal, SHTab, SHCard, SHTable, SHDatePicker, SHInput } from "components";
 
 export default function Home() {
   const [open, setOpen] = React.useState(false);
@@ -67,16 +67,25 @@ export default function Home() {
       autoComplete="off"
     >
       <SHCard>
-        <TextField
-          id="exampleInput"
-          label="Example input"
-          variant="outlined"
+        <SHInput
+          size="small"
+          fullWidth={true}
+          label="Password"
+          id="password"
+          color="secondary"
+          type="password"
+          name="password"
         />
       </SHCard>
       <SHCard>
-        <TextField
-          id="exampleTextarea"
-          label="Example textarea"
+        <SHInput
+          size="small"
+          fullWidth={true}
+          label="Text Area"
+          id="textarea"
+          color="secondary"
+          type="text"
+          name="textarea"
           multiline
           rows={4}
         />

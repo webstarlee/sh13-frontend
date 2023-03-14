@@ -23,7 +23,6 @@ const useStyles = () =>{
     input: {
       "&.MuiInputBase-root": {
         color: "rgba(255,255,255,.75)",
-        height: "42px",
         fontFamily: 'chakra',
         "&>input": {
           backgroundColor: "rgba(255,255,255, 0.05)!important",

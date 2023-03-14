@@ -191,7 +191,7 @@ export default function Setting() {
         </Grid>
       </Box>
       <SHModal
-        header="Fullname Change"
+        header="Update Fullname"
         open={fullnameModal}
         onclose={() => setFullnameModal(false)}
       >
@@ -208,7 +208,7 @@ export default function Setting() {
         <SHButton onClick={changeFullname} variant="outlined" title="Change" />
       </SHModal>
       <SHModal
-        header="Username Change"
+        header="Update Username"
         open={usernameModal}
         onclose={() => setUsernameModal(false)}
       >
@@ -225,7 +225,7 @@ export default function Setting() {
         <SHButton title="Change" onClick={changeUsername} variant="outlined" />
       </SHModal>
       <SHModal
-        header="Password Change"
+        header="Update Password"
         open={passwordModal}
         onclose={() => setPasswordModal(false)}
       >
@@ -264,6 +264,7 @@ export default function Setting() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
+        <SHDivider />
         <SHButton title="Change" onClick={changePwd} variant="outlined" />
       </SHModal>
     </Fragment>

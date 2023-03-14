@@ -38,7 +38,10 @@ const useStyles = () => {
     },
     listText: {
       flex: "1",
-      fontSize: "14px"
+      fontSize: "14px",
+      "&>span": {
+        fontFamily: "chakra",
+      }
     },
     listLink: {
       padding: "0 7px",

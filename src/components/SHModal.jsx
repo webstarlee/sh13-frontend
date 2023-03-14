@@ -115,6 +115,9 @@ const useStyles = () => {
     modalBody: {
       flex: '1 1 auto',
       padding: '1rem',
+      display: 'flex',
+      flexDirection: "column",
+      alignItems: "flex-end"
     },
     modalCover: {
       minHeight: '100%',

@@ -2,6 +2,10 @@ import React from "react";
 import { Divider } from "@mui/material";
 
 const useStyles = () =>({
+  root:{
+    borderBottomWidth: "0px",
+    width: "100%"
+  },
   small: {
     height: "10px",
   },
@@ -19,9 +23,7 @@ export default function SHDivider(props) {
 
   const classes = useStyles();
 
-  const dividerClasses = classes[`${height}`];
-
   return (
-    <Divider sx={dividerClasses} component="div" />
+    <Divider sx={[classes.root, classes[`${height}`]]} component="div" />
   );
 }
