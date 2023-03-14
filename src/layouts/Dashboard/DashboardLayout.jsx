@@ -25,7 +25,7 @@ const useStyles = () => {
       paddingBottom: theme.spacing(2),
     },
     fullContent: {
-      marginLeft: "210px",
+      marginLeft: "250px",
       [theme.breakpoints.down("sm")]: {
         marginLeft: '-0px',
       },
