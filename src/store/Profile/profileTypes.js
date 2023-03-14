@@ -1,0 +1,7 @@
+const profileTypes = {
+  CHANGE_FULLNAME: "CHANGE_FULLNAME",
+  CHANGE_USERNAME: "CHANGE_USERNAME",
+  CHANGE_PASSWORD: "CHANGE_PASSWORD",
+};
+
+export default profileTypes;

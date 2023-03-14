@@ -232,7 +232,7 @@ const useStyles = () => {
       }
     },
     noneArrow: {
-      display: 'none',
+      display:'none',
     }
   })
 };
@@ -265,24 +265,22 @@ export default function SHModal(props) {
       <Box component="div"
         sx={cover ? classes.modalCover : [classes.modalDialog, width]}
       >
-        <Box component="div" sx={cover ? classes.coverContent : classes.modalContent}>
-          {header ?
-            <Box component="div" sx={classes.modalHeader}>
-              <Typography sx={classes.modalTitle}>
-                {header}
-              </Typography>
-              <CloseIcon sx={classes.closeBtn} onClick={onclose} />
-            </Box> : ''
-          }
+        <Box component="div" sx={ cover ? classes.coverContent : classes.modalContent }>
+          <Box component="div" sx={classes.modalHeader}>
+            <Typography sx={classes.modalTitle}>
+              {header}
+            </Typography>
+            <CloseIcon sx={classes.closeBtn} onClick={onclose} />
+          </Box>
           <Box component="div" sx={classes.modalBody}>
             {children}
           </Box>
-        </Box>
-        <Box component="div" sx={cover ? classes.noneArrow : classes.cardArrow}>
-          <Box component="div" sx={classes.cardArrowTopLeft}></Box>
-          <Box component="div" sx={classes.cardArrowTopRight}></Box>
-          <Box component="div" sx={classes.cardArrowBottomRight}></Box>
-          <Box component="div" sx={classes.cardArrowBottomLeft}></Box>
+          <Box component="div" sx={ cover ? classes.noneArrow : classes.cardArrow }>
+            <Box component="div" sx={classes.cardArrowTopLeft}></Box>
+            <Box component="div" sx={classes.cardArrowTopRight}></Box>
+            <Box component="div" sx={classes.cardArrowBottomRight}></Box>
+            <Box component="div" sx={classes.cardArrowBottomLeft}></Box>
+          </Box>
         </Box>
       </Box>
     </Modal >
