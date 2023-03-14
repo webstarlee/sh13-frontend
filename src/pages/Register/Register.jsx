@@ -89,7 +89,7 @@ export default function Register() {
       <SHInput
         size="small"
         fullWidth={true}
-        label="username"
+        label="Username"
         id="username"
         color="secondary"
         name="username"
@@ -129,7 +129,7 @@ export default function Register() {
         onClick={handleClick}
       />
       <SHDivider height="small" />
-      <Typography variant="body2" align="center">
+      <Typography variant="body2" align="center" sx={{fontFamily: "chakra"}}>
         Already have an Account?
         <Link onClick={handleLinkButton} sx={{ cursor: "pointer" }}>
           &nbsp;Sign In.

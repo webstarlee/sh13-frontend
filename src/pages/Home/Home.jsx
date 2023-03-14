@@ -1,4 +1,5 @@
 import React from "react";
+import dayjs from 'dayjs';
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -8,6 +9,7 @@ import { SHModal, SHTab, SHCard, SHTable, SHDatePicker } from "components";
 
 export default function Home() {
   const [open, setOpen] = React.useState(false);
+  const [birthday, setBirthday] = React.useState(dayjs('2023-03-15'));
   const [tableHead, setTableHead] = React.useState([
     { id: 'name', label: 'Name' },
     { id: 'code', label: 'ISO\u00a0Code'},
@@ -49,14 +51,17 @@ export default function Home() {
     <SHCard>third</SHCard>,
   ];
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = (event, reason) => {
+    console.log(reason)
+    setOpen(false);
+  }
 
   return (
     <Box
       component="div"
       sx={{
         mt: 3,
-        "& .MuiTextField-root": { my: 1, width: "100%" },
+        "& .MuiTextField-root": { width: "100%" },
       }}
       noValidate
       autoComplete="off"
@@ -81,14 +86,14 @@ export default function Home() {
           control={<Switch defaultChecked />}
           label="Example switch"
         />
-        <SHDatePicker />
+        <SHDatePicker label="Birthday" id="birthday" name="birthday" value={birthday} setValue={setBirthday} />
         <Button variant="contained" onClick={handleOpen}>
           Open modal
         </Button>
         <SHModal
           open={open}
           onclose={handleClose}
-          cover={false}
+          cover={true}
           header="Test Modal"
           size="large"
         >

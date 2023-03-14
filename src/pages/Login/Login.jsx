@@ -62,7 +62,7 @@ export default function Login() {
         size="small"
         fullWidth={true}
         label="Username"
-        id="fullname"
+        id="username"
         color="secondary"
         name="username"
         value={credentials.username}
@@ -89,7 +89,7 @@ export default function Login() {
         onClick={handleClick}
       />
       <SHDivider height="medium" />
-      <Typography variant="body2" align="center">
+      <Typography variant="body2" align="center" sx={{fontFamily: "chakra"}}>
         Don't have an account yet?
         <Link onClick={handleLinkButton} sx={{ cursor: "pointer" }}>
           &nbsp;Sign Up.
