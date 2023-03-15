@@ -167,8 +167,6 @@ export default function SHTable(props) {
   const classes = useStyles();
   const { THeadData, TBodyData, stickyHeader = false } = props;
 
-  console.log(TBodyData)
-
   return (
     <Table stickyHeader={stickyHeader} sx={classes.paper} aria-label="sticky table" >
       <TableHead sx={classes.tableHead}>

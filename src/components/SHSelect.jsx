@@ -75,8 +75,6 @@ export default function SHSelect(props) {
   const classes = useStyles();
   const labelId = id + "-label";
 
-  console.log(selectData)
-
   return (
     <FormControl sx={classes.root}>
       <InputLabel sx={classes.label} id={labelId} >{label}</InputLabel>
