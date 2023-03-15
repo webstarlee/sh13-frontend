@@ -13,7 +13,10 @@ const useStyles = () =>{
         top: "-20px",
         fontFamily: 'chakra',
         "&.Mui-focused": {
-          color: "rgba(255,255,255,.75)"
+          color: "rgba(255,255,255,.75)",
+          fontSize: "1.25rem",
+          left: "-15px",
+          top: "-20px",
         }
       }
     },

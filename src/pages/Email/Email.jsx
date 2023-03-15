@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Switch, FormControlLabel, Typography, useTheme } from "@mui/material";
+import { Box, Switch, FormControlLabel, Typography, useTheme, Grid } from "@mui/material";
 import { SHModal, SHTab, SHButton, SHCard, SHTable, SHInput, SHDivider } from "components";
 import { DeleteEmail, EmailCreate, GetAllEmails, HandleUpdateEmail } from "store/Email/EmailActions";
 import { headerAction } from "store/Header";
@@ -55,11 +55,11 @@ export default function Email() {
   });
   const tableHead = [
     { minWidth: "100px", label: 'Email' },
-    { minWidth: "60px", align: 'right', label: 'Password' },
-    { minWidth: "50px", align: 'right', label: 'Firstname' },
-    { minWidth: "50px", align: 'right', label: 'LastName' },
-    { minWidth: "50px", align: 'right', label: 'Status' },
-    { minWidth: "100px", align: 'center', label: 'Actions' },
+    { minWidth: "60px", align: 'left', label: 'Password' },
+    { minWidth: "50px", align: 'left', label: 'Firstname' },
+    { minWidth: "50px", align: 'left', label: 'LastName' },
+    { minWidth: "50px", align: 'left', label: 'Status' },
+    { minWidth: "100px", align: 'left', label: 'Actions' },
   ];
   const [tableBody, setTableBody] = useState([]);
 
@@ -125,20 +125,25 @@ export default function Email() {
   }
 
   useEffect(() => {
-     setEmailDatas({
-        ...emailDatas, id: id
-      });
-  },[id])
+    setEmailDatas({
+      ...emailDatas,
+      id: id
+    });
+  }, [id])
+
   const handleChange = (e) => {
     setEmailDatas({
       ...emailDatas, [e.target.name]: e.target.value
     });
   }
+
   const handleCheck = (e) => {
     setEmailDatas({
-      ...emailDatas, status: e.target.checked
+      ...emailDatas,
+      status: e.target.checked
     });
   }
+
   const handleClick = () => {
     if (!emailDatas.email) {
       dispatch(
@@ -151,6 +156,7 @@ export default function Email() {
       );
       return;
     }
+
     if (!emailDatas.password) {
       dispatch(
         headerAction.openToast({
@@ -188,14 +194,14 @@ export default function Email() {
       dispatch(EmailCreate(emailDatas));
     }
     else {
-      
-
       dispatch(HandleUpdateEmail(emailDatas));
     }
+
     handleAddCancel();
   };
+
   const handleConfirmBtn = () => {
-    dispatch(DeleteEmail({ id : id }));
+    dispatch(DeleteEmail({ id: id }));
     confirmClose();
   }
 
@@ -208,17 +214,18 @@ export default function Email() {
     >
       <SHCard>
         <Typography
+          component='div'
           align="right"
         >
           <SHButton
+            size="small"
             onClick={handleOpen}
             title="Add Email"
-            variant="contained"
+            variant="outlined"
           >
 
           </SHButton>
         </Typography>
-        <SHDivider />
         <SHTable
           THeadData={tableHead}
           TBodyData={tableBody}
@@ -227,33 +234,40 @@ export default function Email() {
       </SHCard>
       <SHModal
         open={open}
-        size="small"
+        size="medium"
         onclose={handleClose}
         header={id ? 'Update Email Account' : 'New Email Account'}
       >
-        <SHInput
-          size="small"
-          fullWidth={true}
-          label="Email"
-          color="secondary"
-          type="text"
-          name="email"
-          value={emailDatas.email}
-          onChange={handleChange}
-        />
-        <SHDivider />
-        <SHInput
-          size="small"
-          fullWidth={true}
-          label="Password"
-          color="secondary"
-          type="password"
-          name="password"
-          value={emailDatas.password}
-          onChange={handleChange}
-        />
-        <SHDivider />
-        <SHInput
+        <Grid container spacing={2}>
+          <Grid item xs={6} md={6}>
+            <SHInput
+              size="small"
+              fullWidth={true}
+              label="Email Address"
+              color="secondary"
+              type="text"
+              name="email"
+              value={emailDatas.email}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={6} md={6}>
+            <SHInput
+              size="small"
+              fullWidth={true}
+              label="Recovery Email"
+              color="secondary"
+              type="email"
+              name="recover_email"
+              value={emailDatas.password}
+              onChange={handleChange}
+            />
+          </Grid>
+        </Grid>
+        <SHDivider size='small' />
+        <Grid container spacing={2}>
+          <Grid item xs={6} md={6}>
+          <SHInput
           size="small"
           fullWidth={true}
           label="FirstName"
@@ -263,8 +277,9 @@ export default function Email() {
           value={emailDatas.firstname}
           onChange={handleChange}
         />
-        <SHDivider />
-        <SHInput
+          </Grid>
+          <Grid item xs={6} md={6}>
+          <SHInput
           size="small"
           fullWidth={true}
           label="Lastname"
@@ -274,9 +289,37 @@ export default function Email() {
           value={emailDatas.lastname}
           onChange={handleChange}
         />
+          </Grid>
+        </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={6} md={8}>
+            <SHInput
+              size="small"
+              fullWidth={true}
+              label="Password"
+              color="secondary"
+              type="password"
+              name="password"
+              value={emailDatas.password}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={6} md={4}>
+            <SHInput
+              size="small"
+              fullWidth={true}
+              label="Password"
+              color="secondary"
+              type="password"
+              name="password"
+              value={emailDatas.password}
+              onChange={handleChange}
+            />
+          </Grid>
+        </Grid>
         <SHDivider />
         <FormControlLabel
-          label="Account Block Status"
+          label="Account Block?"
           control={<Switch onChange={handleCheck} />}
           style={{ zIndex: '2200', position: "relative" }}
 
@@ -287,19 +330,19 @@ export default function Email() {
         >
           <SHButton
             variant="outlined"
-            size="large"
-            title={id ? 'Update Email' : 'New Email'}
-            onClick={handleClick}
-          />
-          <SHButton
-            variant="outlined"
-            size="large"
+            size="small"
             align="right"
             title="Cancel"
             onClick={handleAddCancel}
           />
+
+          <SHButton
+            variant="outlined"
+            size="small"
+            title='Save'
+            onClick={handleClick}
+          />
         </Box>
-        <SHDivider height="medium" />
       </SHModal>
       <SHModal
         open={confirm}

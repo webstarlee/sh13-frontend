@@ -41,7 +41,9 @@ const useStyles = () => {
       borderBottom: `3px solid ${theme.palette.secondary.bold}`,
       fontWeight: 'bold',
       color: theme.palette.secondary.bold,
-      padding: theme.spacing(1.5)
+      padding: theme.spacing(1.5),
+      lineHeight: "normal",
+      fontFamily: "chakra_bold"
     },
     tablebodyCell: {
       color: theme.palette.secondary.bold,
@@ -163,10 +165,12 @@ const useStyles = () => {
 export default function SHTable(props) {
 
   const classes = useStyles();
-  const { THeadData, TBodyData, stickyHeader=false } = props;
+  const { THeadData, TBodyData, stickyHeader = false } = props;
+
+  console.log(TBodyData)
 
   return (
-    <Table stickyHeader={stickyHeader} sx={classes.paper}  aria-label="sticky table" >
+    <Table stickyHeader={stickyHeader} sx={classes.paper} aria-label="sticky table" >
       <TableHead sx={classes.tableHead}>
         <TableRow sx={classes.tableRow}>
           {THeadData.map((column, index) => (
@@ -182,22 +186,30 @@ export default function SHTable(props) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {TBodyData.map((row, val) => {
-          return (
-            <TableRow hover role="checkbox" tabIndex={-1} key={val} sx={classes.tableRow}>
-              {THeadData.map((column, index) => {
-                const value = row[index];
-                return (
-                  <TableCell key={index} align={column.align} sx={classes.tablebodyCell}>
-                    {column.format && typeof value === 'number'
-                      ? column.format(value)
-                      : value}
-                  </TableCell>
-                );
-              })}
-            </TableRow>
-          );
-        })}
+        {TBodyData.length > 0?
+          TBodyData.map((row, val) => {
+            return (
+              <TableRow hover role="checkbox" tabIndex={-1} key={val} sx={classes.tableRow}>
+                {THeadData.map((column, index) => {
+                  const value = row[index];
+                  return (
+                    <TableCell key={index} align={column.align} sx={classes.tablebodyCell}>
+                      {column.format && typeof value === 'number'
+                        ? column.format(value)
+                        : value}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            );
+          })
+          :
+          <TableRow hover tabIndex={-1} sx={classes.tableRow}>
+            <TableCell colSpan={6} align='center' sx={classes.tablebodyCell}>
+              Empty Database
+            </TableCell>
+          </TableRow>
+        }
       </TableBody>
     </Table>
   );

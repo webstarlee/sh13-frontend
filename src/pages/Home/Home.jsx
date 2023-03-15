@@ -4,12 +4,21 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import TextField from "@mui/material/TextField";
-import { SHModal, SHTab, SHCard, SHTable, SHDatePicker, SHInput } from "components";
+import {
+  SHModal,
+  SHTab,
+  SHCard,
+  SHTable,
+  SHDatePicker,
+  SHInput,
+  SHSelect,
+  SHDivider
+} from "components";
 
 export default function Home() {
   const [open, setOpen] = React.useState(false);
   const [birthday, setBirthday] = React.useState(dayjs('2023-03-15'));
+  const [status, setStatus] = React.useState("block");
   const [tableHead, setTableHead] = React.useState([
     { id: 'name', label: 'Name' },
     { id: 'code', label: 'ISO\u00a0Code'},
@@ -40,6 +49,10 @@ export default function Home() {
     ['acsde', 'Hallin Ace', 1920192, 102841, 10303.92],
     ['ac1e', 'Hallin Ace', 1920192, 102841, 10303.92],
   ]);
+  const [selectData, setSelectData] = React.useState([
+    {value: "block", title: "Block"},
+    {value: "alive", title: "Alive"}
+  ])
   const tabHeader = [
     { label: "First" },
     { label: "Second" },
@@ -54,6 +67,10 @@ export default function Home() {
   const handleClose = (event, reason) => {
     console.log(reason)
     setOpen(false);
+  }
+
+  const handleSelect = (e) => {
+    setStatus(e.target.value);
   }
 
   return (
@@ -108,6 +125,14 @@ export default function Home() {
         >
           ... This is SHModal Test ...
         </SHModal>
+        <SHDivider size="small" />
+        <SHSelect
+          value={status}
+          setValue={handleSelect}
+          id="account_status"
+          label="Status"
+          selectData={selectData}
+        />
       </SHCard>
       <SHCard>
         <SHTable

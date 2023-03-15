@@ -33,7 +33,7 @@ const useStyles = () => {
       }
     },
     cardBody: {
-      padding: "2rem 1rem",
+      padding: "1rem",
       position: "relative",
       zIndex: 10,
     },

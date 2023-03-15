@@ -19,11 +19,11 @@ const useStyles = () =>({
 
 export default function SHDivider(props) {
 
-  const {height = "medium"} = props;
+  const {size = "medium"} = props;
 
   const classes = useStyles();
 
   return (
-    <Divider sx={[classes.root, classes[`${height}`]]} component="div" />
+    <Divider sx={[classes.root, classes[`${size}`]]} component="div" />
   );
 }
