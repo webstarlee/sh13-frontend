@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { SHButton, SHModal, SHTable } from "components";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { usermanageAction as userActions } from "store/Usermanage";
 import VerifiedIcon from "@mui/icons-material/Verified";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import DeleteIcon from '@mui/icons-material/Delete';
 export default function Usermanage() {
   const tableHead = [
     { label: "No." },
@@ -56,19 +56,24 @@ export default function Usermanage() {
   useEffect(() => {
     if (users) {
       const rows = users.map((user, key) => {
-        const approved = (
-          <IconButton
-            color={user.approved ? "success" : "default"}
-            onClick={() => approveUserModal(user._id, user.approved)}
-          >
-            <VerifiedIcon />
-          </IconButton>
-        );
+        const approved = user.approved ? "Allowed" : "Blocked";
         const actionBtn = (
           <Fragment>
-            <IconButton color="error" onClick={() => deleteUserModal(user._id)}>
-              <DeleteOutlineOutlinedIcon />
-            </IconButton>
+            <Tooltip title={user.approved ? "Block" : "Approve"}>
+              <IconButton
+                color={user.approved ? "success" : "default"}
+                onClick={() => approveUserModal(user._id, user.approved)}
+                size="small"
+                sx={{ mr: 1 }}
+              >
+                <VerifiedIcon fontSize="inherit" />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete">
+              <IconButton color="error" size="small" onClick={() => deleteUserModal(user._id)}>
+                <DeleteIcon fontSize="inherit" />
+              </IconButton>
+            </Tooltip>
           </Fragment>
         );
         return [key + 1, user.fullname, user.username, approved, actionBtn];
@@ -85,57 +90,48 @@ export default function Usermanage() {
         size="small"
         open={approveModalOpen}
         onclose={resetState}
-        header="Approve User Modal"
+        header={approveStatus ? "Block this user account" : "Approve this user account"}
       >
-        <Typography component="p" variant="p" gutterBottom>
-          Do you want to {approveStatus ? "block" : "approve"} this user
-          account?
-        </Typography>
-        <Box sx={{ display: "flex" }}>
-          <Box sx={{ mr: 1 }}>
-            <SHButton
-              onClick={handleApproveUser}
-              color="success"
-              variant="outlined"
-              title="O K"
-            />
-          </Box>
-          <Box>
-            <SHButton
-              color="error"
-              variant="outlined"
-              onClick={resetState}
-              title="CANCEL"
-            />
-          </Box>
+        <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
+          <SHButton
+            onClick={handleApproveUser}
+            color={approveStatus ? "danger" : "success"}
+            variant="contained"
+            title={approveStatus ? "Block" : "Approve"}
+            size="small"
+          />
+          <SHButton
+            color={approveStatus ? "success" : "danger"}
+            variant="contained"
+            sx={{ ml: 1 }}
+            onClick={resetState}
+            title="CANCEL"
+            size="small"
+          />
         </Box>
       </SHModal>
       <SHModal
         size="small"
         open={deleteModalOpen}
         onclose={resetState}
-        header="Delete User Modal"
+        header="Delete This User ?"
       >
-        <Typography component="p" variant="p" gutterBottom>
-          Do you want to delete this user account?
-        </Typography>
-        <Box sx={{ display: "flex" }}>
-          <Box sx={{ mr: 1 }}>
-            <SHButton
-              onClick={handleDeleteUser}
-              color="error"
-              variant="outlined"
-              title="O K"
-            />
-          </Box>
-          <Box>
-            <SHButton
-              color="success"
-              variant="outlined"
-              onClick={resetState}
-              title="CANCEL"
-            />
-          </Box>
+        <Box sx={{ display: "flex", width: "100%", justifyContent: "flex-end" }}>
+          <SHButton
+            onClick={handleDeleteUser}
+            color="danger"
+            variant="contained"
+            title="Delete"
+            size="small"
+          />
+          <SHButton
+            color="success"
+            variant="contained"
+            onClick={resetState}
+            title="CANCEL"
+            size="small"
+            sx={{ ml: 1 }}
+          />
         </Box>
       </SHModal>
     </Fragment>

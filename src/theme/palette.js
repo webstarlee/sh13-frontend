@@ -23,5 +23,6 @@ export const palette = {
     },
     danger: {
         main: "rgba(221,76,76,0.95)",
+        dark: "rgba(170,37,37,0.95)",
     }
 }

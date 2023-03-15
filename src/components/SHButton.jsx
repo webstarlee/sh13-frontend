@@ -20,6 +20,24 @@ const useStyles = () => {
           color: theme.palette.common.white,
         },
       },
+      "&.MuiButton-outlinedSuccess": {
+        "&:hover": {
+          backgroundColor: theme.palette.success.main,
+          color: theme.palette.common.white,
+        },
+      },
+      "&.MuiButton-containedSuccess": {
+        color: theme.palette.common.white,
+        "&:hover": {
+          color: theme.palette.common.white,
+        },
+      },
+      "&.MuiButton-containedDanger": {
+        color: theme.palette.common.white,
+        "&:hover": {
+          backgroundColor: theme.palette.danger.dark,
+        },
+      },
     },
   };
 };

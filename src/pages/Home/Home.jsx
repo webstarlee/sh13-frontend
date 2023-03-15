@@ -86,9 +86,6 @@ export default function Home() {
       autoComplete="off"
     >
       <SHCard>
-        <Box>
-        {t('welcome')}
-        </Box>
         <SHInput
           size="small"
           fullWidth={true}

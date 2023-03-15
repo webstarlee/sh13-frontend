@@ -23,6 +23,14 @@ export const routes = createBrowserRouter([
         path: "setting",
         element: <Setting />,
       },
+      {
+        path: "usermanage",
+        element: <Usermanage />,
+      },
+      {
+        path: "email",
+        element: <Email />,
+      },
     ],
   },
   {
