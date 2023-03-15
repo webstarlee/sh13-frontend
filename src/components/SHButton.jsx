@@ -11,7 +11,7 @@ const useStyles = () => {
       "&.MuiButton-outlinedPrimary": {
         "&:hover": {
           backgroundColor: theme.palette.primary.main,
-          color: "#000",
+          color: theme.palette.common.white,
         },
       },
     },
@@ -19,7 +19,7 @@ const useStyles = () => {
 };
 
 export default function LeeButton(props) {
-  const { title, variant, size, fullWidth, children, ...rest } = props;
+  const { title, variant, size, fullWidth, m, children, ...rest } = props;
 
   const classes = useStyles();
 
@@ -28,7 +28,7 @@ export default function LeeButton(props) {
       variant={variant}
       size={size}
       fullWidth={fullWidth}
-      sx={classes.buttonBase}
+      sx={[classes.buttonBase, m]}
       {...rest}
     >
       {title ? title : children}

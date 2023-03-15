@@ -43,13 +43,21 @@ const useStyles = () => {
       color: theme.palette.secondary.bold,
       padding: theme.spacing(1.5),
       lineHeight: "normal",
-      fontFamily: "chakra_bold"
+      fontFamily: "chakra_bold",
+      "&:last-child": {
+        textAlign: "center",
+      }
     },
     tablebodyCell: {
       color: theme.palette.secondary.bold,
       borderColor: 'inherit',
       borderRight: `1px solid ${theme.palette.secondary.main}`,
-      padding: theme.spacing(1.5)
+      padding: theme.spacing(1.5),
+      verticalAlign: "middle",
+      "&:last-child": {
+        padding: theme.spacing(1),
+        textAlign: "center",
+      }
     },
     cardArrow: {
       position: "absolute",

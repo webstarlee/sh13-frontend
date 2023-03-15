@@ -1,11 +1,30 @@
 import React, { useEffect, useState } from "react";
+import dayjs from 'dayjs';
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Switch, FormControlLabel, Typography, useTheme, Grid } from "@mui/material";
-import { SHModal, SHTab, SHButton, SHCard, SHTable, SHInput, SHDivider } from "components";
-import { DeleteEmail, EmailCreate, GetAllEmails, HandleUpdateEmail } from "store/Email/EmailActions";
+import {
+  Box,
+  Switch,
+  FormControlLabel,
+  Typography,
+  Grid,
+  IconButton,
+  Tooltip
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import {
+  SHModal,
+  SHDatePicker,
+  SHSelect,
+  SHButton,
+  SHCard,
+  SHTable,
+  SHInput,
+  SHDivider
+} from "components";
 import { headerAction } from "store/Header";
-import CloseIcon from "@mui/icons-material/Close";
-import EditIcon from '@mui/icons-material/Edit';
+import { emailAction } from "store/Email";
 
 const useStyles = () => {
   const theme = useTheme();
@@ -17,7 +36,8 @@ const useStyles = () => {
     btnBox: {
       mt: 2,
       display: "flex",
-      justifyContent: "space-between"
+      justifyContent: "flex-end",
+      width: "100%"
     },
     radius: {
       borderRadius: '50px',
@@ -29,100 +49,58 @@ const useStyles = () => {
   })
 };
 
+const actionComponent = (props) => {
+  return (
+    <>
+      <Tooltip title="Edit">
+        <IconButton aria-label="edit" color="primary" size="small">
+          <ModeEditOutlineOutlinedIcon fontSize="inherit" />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Delete">
+        <IconButton aria-label="delete" color="error" size="small">
+          <DeleteOutlineOutlinedIcon fontSize="inherit" />
+        </IconButton>
+      </Tooltip>
+    </>
+  )
+}
+
 export default function Email() {
 
   const dispatch = useDispatch();
   const emails = useSelector((state) => state.email.email);
   const userInfo = useSelector(state => state.header.profile);
   const classes = useStyles();
-
   const [open, setOpen] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [id, setId] = useState('');
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const confirmClose = () => {
-    setConfirm(false);
-    setId('');
-  }
-
   const [emailDatas, setEmailDatas] = useState({
+    id: "",
     email: "",
+    status: "alive",
     password: "",
-    firstname: "",
-    lastname: "",
-    status: "true",
+    recovery: "",
+    sms: "free",
+    createdAt: dayjs('2023-01-01')
   });
-  const tableHead = [
-    { minWidth: "100px", label: 'Email' },
-    { minWidth: "60px", align: 'left', label: 'Password' },
-    { minWidth: "50px", align: 'left', label: 'Firstname' },
-    { minWidth: "50px", align: 'left', label: 'LastName' },
-    { minWidth: "50px", align: 'left', label: 'Status' },
-    { minWidth: "100px", align: 'left', label: 'Actions' },
-  ];
   const [tableBody, setTableBody] = useState([]);
+  const [status, setStatus] = React.useState("alive");
+  const [statusData, setStatusData] = useState([
+    { value: "block", title: "Block" },
+    { value: "alive", title: "Alive" }
+  ]);
+  const [sms, setSms] = React.useState("free");
+  const [smsData, setSmsData] = useState([
+    { value: "free", title: "Free" },
+    { value: "sms_active", title: "sms-activate.org" },
+    { value: "onlinesim", title: "onlinesim.io" },
+  ]);
+  const [createdAt, setCreatedAt] = React.useState(dayjs('2023-01-01'));
 
   useEffect(() => {
-    dispatch(GetAllEmails());
+    dispatch(emailAction.getAllEmails());
   }, [dispatch])
-
-  useEffect(() => {
-    const handleCloseIcon = (id) => {
-      setId(id);
-      setConfirm(true)
-    }
-    const editEmail = (content) => {
-      setId(content._id);
-      setEmailDatas(content);
-      setOpen(true);
-    }
-    if (emails !== null && userInfo) {
-      var arrayData = emails.email.map((content, key) => {
-        var action =
-          <>
-            <SHButton
-              onClick={() => editEmail(content)}
-              sx={[classes.radius]}
-              title={
-                <EditIcon />
-              }
-            >
-            </SHButton>
-            <SHButton
-              sx={classes.radius}
-              title={<CloseIcon />}
-              onClick={() => handleCloseIcon(content._id)}
-            >
-            </SHButton>
-          </>
-        var status = content.status ? "Using" : "blocked";
-        return (
-          userInfo.username === "admin" || content.user === userInfo.id ?
-            [content.email, content.password, content.firstname,
-            content.lastname, status, action]
-            : []
-        )
-
-      }
-      );
-      Object.keys(arrayData)
-        .forEach((k) => arrayData[k].length == 0 && delete arrayData[k]);
-      setTableBody(arrayData);
-    }
-  }, [emails]);
-
-  const handleAddCancel = () => {
-    handleClose();
-    setEmailDatas({
-      email: "",
-      password: "",
-      firstname: "",
-      lastname: "",
-      status: false,
-    });
-    setId('');
-  }
 
   useEffect(() => {
     setEmailDatas({
@@ -131,20 +109,66 @@ export default function Email() {
     });
   }, [id])
 
+  const handleDeleteEmail = (id) => {
+    setId(id);
+    setConfirm(true)
+  }
+  const handleEditEmail = (content) => {
+    setId(content._id);
+    setEmailDatas(content);
+    setOpen(true);
+  }
+
+  useEffect(() => {
+    if (emails && emails.length > 0 && userInfo) {
+      const itemArray = [];
+      emails.map(item => {
+        const actionElement = actionComponent();
+
+        const itemSingle = [item.email, item.recovery, item.sms, dayjs(item.createdAt).format("YYYY-MM-DD"), item.status, actionElement];
+        itemArray.push(itemSingle);
+      });
+
+      setTableBody(itemArray);
+    }
+  }, [emails]);
+
+  const tableHead = [
+    { minWidth: "100px", label: 'Email Address' },
+    { minWidth: "60px", align: 'left', label: 'Recovery Email' },
+    { minWidth: "50px", align: 'left', label: 'SMS' },
+    { minWidth: "50px", align: 'left', label: 'Created At' },
+    { minWidth: "50px", align: 'left', label: 'Status' },
+    { minWidth: "100px", align: 'left', label: 'Actions' },
+  ];
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const confirmClose = () => {
+    setConfirm(false);
+    setId('');
+  }
+
+  const handleAddCancel = () => {
+    handleClose();
+    setEmailDatas({
+      id: "",
+      email: "",
+      status: "alive",
+      password: "",
+      recovery: "",
+      sms: "free",
+      createdAt: dayjs('2023-01-01'),
+    });
+    setId('');
+  }
+
   const handleChange = (e) => {
     setEmailDatas({
       ...emailDatas, [e.target.name]: e.target.value
     });
   }
 
-  const handleCheck = (e) => {
-    setEmailDatas({
-      ...emailDatas,
-      status: e.target.checked
-    });
-  }
-
-  const handleClick = () => {
+  const handleCreateEmail = () => {
     if (!emailDatas.email) {
       dispatch(
         headerAction.openToast({
@@ -152,6 +176,18 @@ export default function Email() {
           title: "Error",
           type: "error",
           comment: "Email field is required",
+        })
+      );
+      return;
+    }
+
+    if (!emailDatas.recovery) {
+      dispatch(
+        headerAction.openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "Recovery Email field is required",
         })
       );
       return;
@@ -168,41 +204,78 @@ export default function Email() {
       );
       return;
     }
-    if (!emailDatas.firstname) {
+    if (!emailDatas.status) {
       dispatch(
         headerAction.openToast({
           IsOpen: true,
           title: "Error",
           type: "error",
-          comment: "Firstname field is required",
+          comment: "Status field is required",
         })
       );
       return;
-    }
-    if (!emailDatas.lastname) {
-      dispatch(
-        headerAction.openToast({
-          IsOpen: true,
-          title: "Error",
-          type: "error",
-          comment: "Lastname field is required",
-        })
-      );
-      return;
-    }
-    if (!id) {
-      dispatch(EmailCreate(emailDatas));
-    }
-    else {
-      dispatch(HandleUpdateEmail(emailDatas));
     }
 
-    handleAddCancel();
+    if (!emailDatas.sms) {
+      dispatch(
+        headerAction.openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "SMS field is required",
+        })
+      );
+      return;
+    }
+    if (!emailDatas.createdAt) {
+      dispatch(
+        headerAction.openToast({
+          IsOpen: true,
+          title: "Error",
+          type: "error",
+          comment: "CreatedAt field is required",
+        })
+      );
+      return;
+    }
+
+    if (!id) {
+      dispatch(emailAction.emailCreate(emailDatas));
+    }
+    else {
+      dispatch(emailAction.updateEmail(emailDatas));
+    }
+
+    // handleAddCancel();
   };
 
   const handleConfirmBtn = () => {
-    dispatch(DeleteEmail({ id: id }));
+    dispatch(emailAction.deleteEmail({ id: id }));
     confirmClose();
+  }
+
+  const handleSms = (e) => {
+    setSms(e.target.value);
+    setEmailDatas({
+      ...emailDatas,
+      sms: e.target.value,
+    });
+  }
+
+  const handleStatus = (e) => {
+    setStatus(e.target.value);
+    setEmailDatas({
+      ...emailDatas,
+      status: e.target.value,
+    });
+  }
+
+  const handleCreatedAt = (e) => {
+    setCreatedAt(e.target.value);
+    setEmailDatas({
+      ...emailDatas,
+      createdAt: e.target.value,
+    });
   }
 
   return (
@@ -232,6 +305,7 @@ export default function Email() {
         >
         </SHTable>
       </SHCard>
+
       <SHModal
         open={open}
         size="medium"
@@ -258,8 +332,8 @@ export default function Email() {
               label="Recovery Email"
               color="secondary"
               type="email"
-              name="recover_email"
-              value={emailDatas.password}
+              name="recovery"
+              value={emailDatas.recovery}
               onChange={handleChange}
             />
           </Grid>
@@ -267,64 +341,48 @@ export default function Email() {
         <SHDivider size='small' />
         <Grid container spacing={2}>
           <Grid item xs={6} md={6}>
-          <SHInput
-          size="small"
-          fullWidth={true}
-          label="FirstName"
-          color="secondary"
-          type="text"
-          name="firstname"
-          value={emailDatas.firstname}
-          onChange={handleChange}
-        />
+            <SHInput
+              size="small"
+              fullWidth={true}
+              label="Password"
+              color="secondary"
+              type="text"
+              name="password"
+              value={emailDatas.password}
+              onChange={handleChange}
+            />
           </Grid>
           <Grid item xs={6} md={6}>
-          <SHInput
-          size="small"
-          fullWidth={true}
-          label="Lastname"
-          color="secondary"
-          type="text"
-          name="lastname"
-          value={emailDatas.lastname}
-          onChange={handleChange}
-        />
+            <SHSelect
+              value={sms}
+              setValue={handleSms}
+              id="account_status"
+              label="Sms ?"
+              selectData={smsData}
+            />
           </Grid>
         </Grid>
+        <SHDivider size='small' />
         <Grid container spacing={2}>
-          <Grid item xs={6} md={8}>
-            <SHInput
-              size="small"
-              fullWidth={true}
-              label="Password"
-              color="secondary"
-              type="password"
-              name="password"
-              value={emailDatas.password}
-              onChange={handleChange}
+          <Grid item xs={6} md={6}>
+            <SHSelect
+              value={status}
+              setValue={handleStatus}
+              id="account_status"
+              label="Status"
+              selectData={statusData}
             />
           </Grid>
-          <Grid item xs={6} md={4}>
-            <SHInput
-              size="small"
-              fullWidth={true}
-              label="Password"
-              color="secondary"
-              type="password"
-              name="password"
-              value={emailDatas.password}
-              onChange={handleChange}
+          <Grid item xs={6} md={6}>
+            <SHDatePicker
+              label="Create At"
+              id="createdAt"
+              name="createdAt"
+              value={createdAt}
+              setValue={handleCreatedAt}
             />
           </Grid>
         </Grid>
-        <SHDivider />
-        <FormControlLabel
-          label="Account Block?"
-          control={<Switch onChange={handleCheck} />}
-          style={{ zIndex: '2200', position: "relative" }}
-
-        />
-        <SHDivider height="small" />
         <Box
           sx={classes.btnBox}
         >
@@ -340,7 +398,8 @@ export default function Email() {
             variant="outlined"
             size="small"
             title='Save'
-            onClick={handleClick}
+            m={{ ml: 1 }}
+            onClick={handleCreateEmail}
           />
         </Box>
       </SHModal>

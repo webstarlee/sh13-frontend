@@ -32,8 +32,6 @@ function AuthLayout() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  console.log(location);
-
   if (accessToken) {
     return <Navigate to="/home" replace />;
   }

@@ -1,20 +1,20 @@
 import types from "./EmailTypes";
 
-export const EmailCreate = (data) => ({
+export const emailCreate = (data) => ({
     type: types.EMAIL_CREATE,
     payload: data,
 });
 
-export const GetAllEmails = () => ({
+export const getAllEmails = () => ({
     type: types.GET_ALL_EMAIL,
 });
 
-export const HandleUpdateEmail = (data) => ({
-    type: types.UPDATE_EMAIL,
+export const updateEmail = (data) => ({
+    type: types.EMAIL_UPDATE,
     payload: data,
 });
 
-export const DeleteEmail = (id) => ({
-    type: types.DELETE_EMAIL,
+export const deleteEmail = (id) => ({
+    type: types.EMAIL_DELETE,
     payload: id,
 });

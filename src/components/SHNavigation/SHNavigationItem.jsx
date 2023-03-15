@@ -105,7 +105,6 @@ const NavigationItem = ({ item, collapsed }) => {
   React.useEffect(() => {
     if (pathname.search(new RegExp(item.url, "g")) !== -1) {
       setOpen(true);
-      console.log("opened")
     }
   }, [pathname, item.url]);
   return (

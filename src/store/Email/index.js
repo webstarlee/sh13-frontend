@@ -1,3 +1,2 @@
-export * as EmailActions from "./EmailActions";
-export { default as headerTypes } from "../Header/headerTypes";
+export * as emailAction from "./EmailActions";
 export { default as EmailSagas } from './EmailSagas';
