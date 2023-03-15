@@ -22,7 +22,6 @@ const useStyles = () => {
 
       color: theme.palette.type && theme.palette.grey[100],
       backgroundColor: "transparent",
-      borderRight: "unset",
     },
     drawerPaperClose: {
       overflowX: "hidden",

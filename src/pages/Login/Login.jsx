@@ -5,6 +5,7 @@ import { Typography, Link } from "@mui/material";
 import { SHInput, SHDivider, SHButton, SHCard } from "components";
 import { logInStart } from "store/Auth/authActions";
 import { headerAction } from "store/Header";
+import { useTranslation } from 'react-i18next';
 
 const useStyles = () => ({
   root: {
@@ -15,6 +16,7 @@ const useStyles = () => ({
 });
 
 export default function Login() {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,12 +58,12 @@ export default function Login() {
   return (
     <SHCard component="form" autoComplete="off">
       <Typography variant="h3" align="center" sx={classes.root} gutterBottom>
-        Sign In
+        {t('auth.sign_in')}
       </Typography>
       <SHInput
         size="small"
         fullWidth={true}
-        label="Username"
+        label={t('auth.username')}
         id="username"
         color="secondary"
         name="username"
@@ -72,7 +74,7 @@ export default function Login() {
       <SHInput
         size="small"
         fullWidth={true}
-        label="Password"
+        label={t('auth.password')}
         id="password"
         color="secondary"
         type="password"
@@ -85,14 +87,14 @@ export default function Login() {
         variant="outlined"
         size="large"
         fullWidth={true}
-        title="Sign In"
+        title={t('auth.sign_in')}
         onClick={handleClick}
       />
       <SHDivider height="medium" />
       <Typography variant="body2" align="center" sx={{fontFamily: "chakra"}}>
-        Don't have an account yet?
+        {t('auth.dont_have_account')}
         <Link onClick={handleLinkButton} sx={{ cursor: "pointer" }}>
-          &nbsp;Sign Up.
+          &nbsp;{t('auth.sign_up')}.
         </Link>
       </Typography>
     </SHCard>

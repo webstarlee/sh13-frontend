@@ -14,8 +14,10 @@ import {
   SHSelect,
   SHDivider
 } from "components";
+import { useTranslation } from 'react-i18next';
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const [birthday, setBirthday] = React.useState(dayjs('2023-03-15'));
   const [status, setStatus] = React.useState("block");
@@ -84,6 +86,9 @@ export default function Home() {
       autoComplete="off"
     >
       <SHCard>
+        <Box>
+        {t('welcome')}
+        </Box>
         <SHInput
           size="small"
           fullWidth={true}

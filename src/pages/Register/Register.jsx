@@ -5,6 +5,7 @@ import { Typography, Link } from "@mui/material";
 import { SHInput, SHDivider, SHButton, SHCard } from "components";
 import { registerStart } from "store/Auth/authActions";
 import { headerAction } from "store/Header";
+import { useTranslation } from 'react-i18next';
 
 const useStyles = () => ({
   root: {
@@ -15,6 +16,7 @@ const useStyles = () => ({
 });
 
 export default function Register() {
+  const { t } = useTranslation();
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,7 +65,7 @@ export default function Register() {
       );
       return;
     }
-    
+
     dispatch(registerStart(credentials));
   };
   const handleLinkButton = () => {
@@ -73,12 +75,12 @@ export default function Register() {
   return (
     <SHCard component="form" autoComplete="off">
       <Typography variant="h3" align="center" sx={classes.root} gutterBottom>
-        Sign Up
+        {t('auth.sign_up')}
       </Typography>
       <SHInput
         size="small"
         fullWidth={true}
-        label="Fullname"
+        label={t('auth.fullname')}
         id="fullname"
         color="secondary"
         name="fullname"
@@ -89,7 +91,7 @@ export default function Register() {
       <SHInput
         size="small"
         fullWidth={true}
-        label="Username"
+        label={t('auth.username')}
         id="username"
         color="secondary"
         name="username"
@@ -100,7 +102,7 @@ export default function Register() {
       <SHInput
         size="small"
         fullWidth={true}
-        label="Password"
+        label={t('auth.password')}
         id="password"
         color="secondary"
         type="password"
@@ -112,7 +114,7 @@ export default function Register() {
       <SHInput
         size="small"
         fullWidth={true}
-        label="Password Confirm"
+        label={t('auth.password_confirm')}
         id="password_confirm"
         color="secondary"
         type="password"
@@ -125,14 +127,14 @@ export default function Register() {
         variant="outlined"
         size="large"
         fullWidth={true}
-        title="Sign Up"
+        title={t('auth.sign_up')}
         onClick={handleClick}
       />
       <SHDivider height="small" />
-      <Typography variant="body2" align="center" sx={{fontFamily: "chakra"}}>
-        Already have an Account?
+      <Typography variant="body2" align="center" sx={{ fontFamily: "chakra" }}>
+        {t('auth.already_have_account')}
         <Link onClick={handleLinkButton} sx={{ cursor: "pointer" }}>
-          &nbsp;Sign In.
+          &nbsp;{t('auth.sign_in')}.
         </Link>
       </Typography>
     </SHCard>

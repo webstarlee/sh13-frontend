@@ -96,10 +96,6 @@ body:before {
   z-index: -5;
 }
 
-#root {
-  padding-top: 52px;
-}
-
 *::-webkit-scrollbar {
   width: 0.4em;
 }
