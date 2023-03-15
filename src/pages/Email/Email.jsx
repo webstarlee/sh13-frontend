@@ -3,8 +3,6 @@ import dayjs from 'dayjs';
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
-  Switch,
-  FormControlLabel,
   Typography,
   Grid,
   IconButton,
@@ -68,7 +66,6 @@ function ActionComponent(props) {
 }
 
 export default function Email() {
-
   const dispatch = useDispatch();
   const emails = useSelector((state) => state.email.email);
   const userInfo = useSelector(state => state.header.profile);
@@ -425,7 +422,7 @@ export default function Email() {
         onclose={confirmClose}
         header="Do you want to delete this account?"
       >
-        <Typography align="right">
+        <Typography component="div" align="right">
           <SHButton variant="outlined" color="danger" onClick={handleConfirmBtn} title="Sure"></SHButton>
           <SHButton variant="outlined" sx={{ml: 1}} onClick={confirmClose} title="Cancel"></SHButton>
         </Typography>

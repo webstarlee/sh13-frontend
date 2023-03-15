@@ -14,7 +14,7 @@ const useStyles = () => {
       backgroundImage: "unset",
     },
     content: {
-      height: "calc(100vh - 52px)",
+      height: "100vh",
       overflow: "auto",
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
