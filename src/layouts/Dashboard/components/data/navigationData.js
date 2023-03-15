@@ -2,6 +2,7 @@ import {
   Dashboard,
   PeopleAlt,
   ImportContacts,
+  Email
 } from "@mui/icons-material";
 
 export const mainNavigation = [
@@ -31,5 +32,10 @@ export const mainNavigation = [
     name: "Users",
     icon: PeopleAlt,
     url: `/users`,
+  },
+  {
+    name: "Email Account",
+    icon: Email,
+    url: `/email`,
   },
 ];
