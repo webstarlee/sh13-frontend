@@ -3,6 +3,7 @@ import { TextField } from "@mui/material";
 
 const useStyles = () =>({
   textField: {
+    zIndex: "2100",
     marginTop: "25px",
     "&>.MuiFormLabel-root": {
       fontSize: "1.25rem",
