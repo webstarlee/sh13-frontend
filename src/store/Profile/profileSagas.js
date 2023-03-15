@@ -44,7 +44,7 @@ export function* onChangePasswordStart() {
   yield takeLatest(types.CHANGE_PASSWORD, changePasswordSaga);
 }
 
-export default function* projectSagas() {
+export default function* profileSagas() {
   yield all([
     call(onChangeFullnameStart),
     call(onChangeUsernameStart),

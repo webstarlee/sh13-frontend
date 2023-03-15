@@ -1,0 +1,8 @@
+const profileTypes = {
+  GET_ALL_USER_START: "GET_ALL_USER_START",
+  GET_ALL_USER_SUCCESS: "GET_ALL_USER_SUCCESS",
+  APPROVE_USER: "APPROVE_USER",
+  DELETE_USER: "DELETE_USER",
+};
+
+export default profileTypes;
