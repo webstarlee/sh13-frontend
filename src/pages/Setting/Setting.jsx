@@ -72,7 +72,7 @@ export default function Setting() {
           IsOpen: true,
           title: "Error",
           type: "error",
-          comment: "old password is rquired!",
+          comment: "Old password is rquired!",
         })
       );
       return;
@@ -83,7 +83,7 @@ export default function Setting() {
           IsOpen: true,
           title: "Error",
           type: "error",
-          comment: "password is rquired!",
+          comment: "Password is rquired!",
         })
       );
       return;

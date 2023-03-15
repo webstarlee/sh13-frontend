@@ -28,8 +28,8 @@ export const mainNavigation = [
     ],
   },
   {
-    name: "Users",
+    name: "Usermanage",
     icon: PeopleAlt,
-    url: `/users`,
+    url: `/usermanage`,
   },
 ];
