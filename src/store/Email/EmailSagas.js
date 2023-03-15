@@ -30,18 +30,9 @@ export function* createEmailAccount(action) {
   }
 }
 
-export function* updateEmailAccount({
-  payload: { email, password, firstname, lastname, status, id },
-}) {
+export function* updateEmailAccount(action) {
   try {
-    const res = yield updateEmailApi(
-      email,
-      password,
-      firstname,
-      lastname,
-      status,
-      id
-    );
+    const res = yield updateEmailApi(action.payload);
     if (res) yield put(getAllEmails());
   } catch (error) {
     yield put(headerAction.newError(error));

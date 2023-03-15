@@ -14,12 +14,18 @@ const useStyles = () => {
           color: theme.palette.common.white,
         },
       },
+      "&.MuiButton-outlinedDanger": {
+        "&:hover": {
+          backgroundColor: theme.palette.danger.main,
+          color: theme.palette.common.white,
+        },
+      },
     },
   };
 };
 
 export default function LeeButton(props) {
-  const { title, variant, size, fullWidth, m, children, ...rest } = props;
+  const { title, variant, size, fullWidth, sx, children, ...rest } = props;
 
   const classes = useStyles();
 
@@ -28,7 +34,7 @@ export default function LeeButton(props) {
       variant={variant}
       size={size}
       fullWidth={fullWidth}
-      sx={[classes.buttonBase, m]}
+      sx={[classes.buttonBase, sx]}
       {...rest}
     >
       {title ? title : children}

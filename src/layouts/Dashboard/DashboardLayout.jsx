@@ -26,9 +26,6 @@ const useStyles = () => {
     },
     fullContent: {
       marginLeft: "250px",
-      [theme.breakpoints.down("sm")]: {
-        marginLeft: '-0px',
-      },
       transition: theme.transitions.create("margin", {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,

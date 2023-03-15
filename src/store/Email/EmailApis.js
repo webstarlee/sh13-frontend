@@ -11,15 +11,8 @@ const createEmailApi = async (payload) => {
     return response;
 };
 
-const updateEmailApi = async (email, password, firstname, lastname, status, id) => {
-    const response = await axios.post(`${API_URL}/email/update`, {
-        email,
-        password,
-        firstname,
-        lastname,
-        status,
-        id
-    });
+const updateEmailApi = async (payload) => {
+    const response = await axios.post(`${API_URL}/email/update`, payload);
     return response.data;
 };
 

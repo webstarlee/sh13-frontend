@@ -9,9 +9,6 @@ const useStyles = () => {
   const theme = useTheme();
   return ({
     drawerPaper: {
-      [theme.breakpoints.down("sm")]: {
-        marginLeft: '-250px',
-      },
       width: drawerWidth,
       display: "flex",
       top: "52px",

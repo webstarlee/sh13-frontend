@@ -20,5 +20,8 @@ export const palette = {
     },
     modalFade: {
         main: "rgba(29, 40, 53, 0.95)",
+    },
+    danger: {
+        main: "rgba(221,76,76,0.95)",
     }
 }

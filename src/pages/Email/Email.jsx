@@ -49,16 +49,17 @@ const useStyles = () => {
   })
 };
 
-const actionComponent = (props) => {
+function ActionComponent(props) {
+  const { onEditClick, onDeleteClick } = props;
   return (
     <>
       <Tooltip title="Edit">
-        <IconButton aria-label="edit" color="primary" size="small">
+        <IconButton aria-label="edit" onClick={onEditClick} color="primary" size="small">
           <ModeEditOutlineOutlinedIcon fontSize="inherit" />
         </IconButton>
       </Tooltip>
       <Tooltip title="Delete">
-        <IconButton aria-label="delete" color="error" size="small">
+        <IconButton aria-label="delete" onClick={onDeleteClick} color="error" size="small">
           <DeleteOutlineOutlinedIcon fontSize="inherit" />
         </IconButton>
       </Tooltip>
@@ -116,6 +117,9 @@ export default function Email() {
   const handleEditEmail = (content) => {
     setId(content._id);
     setEmailDatas(content);
+    setSms(content.sms);
+    setStatus(content.status);
+    setCreatedAt(content.createdAt);
     setOpen(true);
   }
 
@@ -123,7 +127,7 @@ export default function Email() {
     if (emails && emails.length > 0 && userInfo) {
       const itemArray = [];
       emails.map(item => {
-        const actionElement = actionComponent();
+        const actionElement = <ActionComponent onEditClick={() => handleEditEmail(item)} onDeleteClick={() => handleDeleteEmail(item._id)} />;
 
         const itemSingle = [item.email, item.recovery, item.sms, dayjs(item.createdAt).format("YYYY-MM-DD"), item.status, actionElement];
         itemArray.push(itemSingle);
@@ -141,15 +145,22 @@ export default function Email() {
     { minWidth: "50px", align: 'left', label: 'Status' },
     { minWidth: "100px", align: 'left', label: 'Actions' },
   ];
+
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = (event, reason) => {
+    if (reason === 'backdropClick') {
+      event.preventDefault();
+    } else {
+      setOpen(false);
+      clearAll();
+    }
+  };
   const confirmClose = () => {
     setConfirm(false);
     setId('');
   }
 
-  const handleAddCancel = () => {
-    handleClose();
+  const clearAll = () => {
     setEmailDatas({
       id: "",
       email: "",
@@ -162,13 +173,17 @@ export default function Email() {
     setId('');
   }
 
+  const handleAddCancel = () => {
+    handleClose();
+  }
+
   const handleChange = (e) => {
     setEmailDatas({
       ...emailDatas, [e.target.name]: e.target.value
     });
   }
 
-  const handleCreateEmail = () => {
+  const handleSubmitEmail = () => {
     if (!emailDatas.email) {
       dispatch(
         headerAction.openToast({
@@ -246,7 +261,9 @@ export default function Email() {
       dispatch(emailAction.updateEmail(emailDatas));
     }
 
-    // handleAddCancel();
+    setTimeout(() => {
+      handleClose();
+    }, 500);
   };
 
   const handleConfirmBtn = () => {
@@ -270,11 +287,11 @@ export default function Email() {
     });
   }
 
-  const handleCreatedAt = (e) => {
-    setCreatedAt(e.target.value);
+  const handleCreatedAt = (value) => {
+    setCreatedAt(value);
     setEmailDatas({
       ...emailDatas,
-      createdAt: e.target.value,
+      createdAt: value,
     });
   }
 
@@ -398,19 +415,19 @@ export default function Email() {
             variant="outlined"
             size="small"
             title='Save'
-            m={{ ml: 1 }}
-            onClick={handleCreateEmail}
+            sx={{ ml: 1 }}
+            onClick={handleSubmitEmail}
           />
         </Box>
       </SHModal>
       <SHModal
         open={confirm}
         onclose={confirmClose}
-        header="Do you want to delete this?"
+        header="Do you want to delete this account?"
       >
         <Typography align="right">
-          <SHButton onClick={handleConfirmBtn} title="Sure"></SHButton>
-          <SHButton onClick={confirmClose} title="Cancel"></SHButton>
+          <SHButton variant="outlined" color="danger" onClick={handleConfirmBtn} title="Sure"></SHButton>
+          <SHButton variant="outlined" sx={{ml: 1}} onClick={confirmClose} title="Cancel"></SHButton>
         </Typography>
       </SHModal>
     </Box>
