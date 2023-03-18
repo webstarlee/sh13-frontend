@@ -51,10 +51,10 @@ export default function Home() {
     ['acsde', 'Hallin Ace', 1920192, 102841, 10303.92],
     ['ac1e', 'Hallin Ace', 1920192, 102841, 10303.92],
   ]);
-  const [selectData, setSelectData] = React.useState([
+  const selectData = [
     {value: "block", title: "Block"},
     {value: "alive", title: "Alive"}
-  ])
+  ]
   const tabHeader = [
     { label: "First" },
     { label: "Second" },
@@ -121,7 +121,7 @@ export default function Home() {
         <SHModal
           open={open}
           onclose={handleClose}
-          cover={true}
+          cover={false}
           header="Test Modal"
           size="large"
         >

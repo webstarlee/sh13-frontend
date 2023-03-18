@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "constants";
+import { API_URL } from "config";
 
 const getAllEmailApi = async () => {
     const response = await axios.get(`${API_URL}/email/all`);

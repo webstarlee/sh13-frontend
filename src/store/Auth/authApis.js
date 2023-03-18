@@ -1,8 +1,10 @@
 import axios from "axios";
-import { API_URL } from "constants";
+import { convertApiUrl } from "config";
+
+
 
 const logIn = async (username, password) => {
-  const response = await axios.post(`${API_URL}/auth/signin`, {
+  const response = await axios.post(convertApiUrl('auth/signin'), {
     username,
     password,
   });
@@ -10,7 +12,7 @@ const logIn = async (username, password) => {
 };
 
 const register = async (fullname, username, password, confirmPassword) => {
-  await axios.post(`${API_URL}/auth/signup`, {
+  await axios.post(convertApiUrl('auth/signup'), {
     fullname,
     username,
     password,

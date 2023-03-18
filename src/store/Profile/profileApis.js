@@ -1,4 +1,4 @@
-import { API_URL } from "constants";
+import { API_URL } from "config";
 
 const changeFullname = async (data) => {
   const response = await window.axios.post(

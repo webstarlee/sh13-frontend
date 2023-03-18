@@ -42,7 +42,7 @@ const useStyles = () => {
   };
 };
 
-export default function LeeButton(props) {
+export default function SHButton(props) {
   const { title, variant, size, fullWidth, sx, children, ...rest } = props;
 
   const classes = useStyles();

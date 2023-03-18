@@ -11,3 +11,4 @@ export { default as SHTable } from "./SHTable";
 export { default as SHTab } from "./SHTab";
 export { default as SHDatePicker } from "./SHDatePicker";
 export { default as SHSelect } from "./SHSelect";
+export { default as SHCropper } from "./SHCropper";

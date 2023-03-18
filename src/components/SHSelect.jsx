@@ -64,13 +64,29 @@ const useStyles = () => {
           }
         }
       },
-    }
+    },
+    smallMenuPaper: {
+      "& .MuiMenuItem-root": {
+        fontSize: "9px",
+      },
+    },
+    normal: {
+      
+    },
+    small: {
+      height: "22px",
+      "& .MuiSelect-select": {
+        fontSize: "12px",
+        paddingTop: theme.spacing(0),
+        paddingBottom: theme.spacing(0)
+      },
+    },
   })
 };
 
 export default function SHSelect(props) {
 
-  const { value, setValue, id, label, selectData } = props;
+  const { value, setValue, id, label, selectData, size = "normal" } = props;
 
   const classes = useStyles();
   const labelId = id + "-label";
@@ -84,10 +100,10 @@ export default function SHSelect(props) {
         value={value}
         onChange={setValue}
         displayEmpty
-        sx={classes.select}
+        sx={[classes.select, classes[size]]}
         MenuProps={{
           PaperProps: {
-            sx: classes.menuPaper
+            sx: [classes.menuPaper, classes[`${size}MenuPaper`]]
           }
         }}
       >

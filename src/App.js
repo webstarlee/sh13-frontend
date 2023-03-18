@@ -2,12 +2,14 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
+import { useTranslation } from 'react-i18next';
 import { router } from "routes";
 import { theme } from "theme";
 import { SHToast } from "components";
 import { headerAction } from "store/Header";
 
 function App() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const error = useSelector((state) => state.header.error);
   const message = useSelector((state) => state.header.message);
@@ -17,7 +19,7 @@ function App() {
       const err = Object.values(error)[0];
       const data = {
         IsOpen: true,
-        title: "Error",
+        title: t('error'),
         type: "error",
         comment: err,
       };
@@ -30,7 +32,7 @@ function App() {
     if (message) {
       const data = {
         IsOpen: true,
-        title: "Success",
+        title: t('success'),
         type: "success",
         comment: message,
       };

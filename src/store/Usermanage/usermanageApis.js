@@ -1,4 +1,4 @@
-import { API_URL } from "constants";
+import { API_URL } from "config";
 
 const getAllUserApi = async () => {
   const response = await window.axios.get(`${API_URL}/user/all`);

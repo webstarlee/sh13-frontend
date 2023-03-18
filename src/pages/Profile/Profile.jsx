@@ -1,13 +1,15 @@
-import React, { Fragment } from "react";
-import { SHTab, SHCard } from "components";
+import React, { Fragment, useRef } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import img from "assets/images/cover_6.jpg";
+
+import { SHButton, SHCard, SHCropper } from "components";
+
 const useStyle = () => {
   const theme = useTheme();
   return {
     container: {
-      display: "flex",
+      // display: "flex",
+      height: "400px"
     },
     leftSide: {
       paddingLeft: theme.spacing(3),
@@ -26,8 +28,12 @@ const useStyle = () => {
   };
 };
 
+const CONTAINER_HEIGHT = 300
+
 export default function Profile() {
   const classes = useStyle();
+  const fileRef = React.useRef();
+
   const tabHeader = [
     { label: "First" },
     { label: "Second" },
@@ -36,286 +42,6 @@ export default function Profile() {
   const tabContent = [
     <SHCard>
       first{" "}
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
       <Typography sx={{ fontSize: "80%" }} variant="p">
         Principal UXUI Design & Brand Architecture for HUD. Creator of
         SeanTheme. Bringing the world closer together. Studied Computer Science
@@ -330,154 +56,9 @@ export default function Profile() {
         SeanTheme. Bringing the world closer together. Studied Computer Science
         and Psychology at Harvard University.
       </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
+
     </SHCard>,
     <SHCard>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
-      <Typography sx={{ fontSize: "80%" }} variant="p">
-        Principal UXUI Design & Brand Architecture for HUD. Creator of
-        SeanTheme. Bringing the world closer together. Studied Computer Science
-        and Psychology at Harvard University.
-      </Typography>
       <Typography sx={{ fontSize: "80%" }} variant="p">
         Principal UXUI Design & Brand Architecture for HUD. Creator of
         SeanTheme. Bringing the world closer together. Studied Computer Science
@@ -486,36 +67,34 @@ export default function Profile() {
     </SHCard>,
   ];
 
+  const [file, setFile] = React.useState(null);
+  const [base64Img, setBase64Img] = React.useState(null);
+
+  const bindFileInput =() => {
+    fileRef.current.click();
+  }
+
+  console.log(base64Img);
+
   return (
     <Fragment>
       <Box component="div" sx={{ py: 3 }}>
         <SHCard>
+          <input
+            ref={fileRef}
+            type="file"
+            name="file"
+            style={{ display: 'none' }}
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+          <SHButton
+            size="small"
+            onClick={bindFileInput}
+            title="Add Email"
+            variant="outlined"
+          />
           <Box sx={classes.container} component="div">
-            <Box sx={classes.leftSide} component="div">
-              <Box sx={{ position: "sticky", top: "60px" }} component="div">
-                <Box sx={classes.profileImg}>
-                  <img src={img} />
-                </Box>
-                <Typography sx={{ color: "white" }} variant="h6">
-                  John smith
-                </Typography>
-                <Typography
-                  sx={{ color: "white" }}
-                  variant="subtitle1"
-                  gutterBottom
-                >
-                  Johnsmith
-                </Typography>
-                <Typography sx={{ fontSize: "80%" }} variant="p">
-                  Principal UXUI Design & Brand Architecture for HUD. Creator of
-                  SeanTheme. Bringing the world closer together. Studied
-                  Computer Science and Psychology at Harvard University.
-                </Typography>
-              </Box>
-            </Box>
-            <Box sx={classes.rightSide} component="div">
-              <SHTab tabHeader={tabHeader} tabContent={tabContent} />
-            </Box>
+            {file ? <SHCropper file={file} resetFile={setFile} setResult={setBase64Img} /> : ''}
           </Box>
         </SHCard>
       </Box>

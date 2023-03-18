@@ -1,0 +1,14 @@
+{
+  "error": "错误",
+  "success": "成功",
+  "auth": {
+    "sign_in": "登录",
+    "sign_up": "注册",
+    "username": "用户名",
+    "fullname": "全名",
+    "password": "密码",
+    "password_confirm": "密码确认",
+    "dont_have_account": "还没有账户?",
+    "already_have_account": "已有账户?"
+  }
+}

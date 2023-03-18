@@ -1,5 +1,6 @@
 {
-  "welcome": "Here is my some sample code",
+  "error": "Error",
+  "success": "Success",
   "auth": {
     "sign_in": "Sign In",
     "sign_up": "Sign Up",

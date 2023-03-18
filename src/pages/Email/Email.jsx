@@ -84,16 +84,16 @@ export default function Email() {
   });
   const [tableBody, setTableBody] = useState([]);
   const [status, setStatus] = React.useState("alive");
-  const [statusData, setStatusData] = useState([
+  const statusData = [
     { value: "block", title: "Block" },
     { value: "alive", title: "Alive" }
-  ]);
+  ];
   const [sms, setSms] = React.useState("free");
-  const [smsData, setSmsData] = useState([
+  const smsData = [
     { value: "free", title: "Free" },
     { value: "sms_active", title: "sms-activate.org" },
     { value: "onlinesim", title: "onlinesim.io" },
-  ]);
+  ];
   const [createdAt, setCreatedAt] = React.useState(dayjs('2023-01-01'));
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export default function Email() {
     setEmailDatas(content);
     setSms(content.sms);
     setStatus(content.status);
-    setCreatedAt(content.createdAt);
+    setCreatedAt(dayjs(content.createdAt));
     setOpen(true);
   }
 
@@ -309,9 +309,7 @@ export default function Email() {
             onClick={handleOpen}
             title="Add Email"
             variant="outlined"
-          >
-
-          </SHButton>
+          />
         </Typography>
         <SHTable
           THeadData={tableHead}

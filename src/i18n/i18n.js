@@ -2,8 +2,9 @@ import i18n from "i18next";
 import Backend from 'i18next-xhr-backend';
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
-import translationsEN from './en/translation.json'
-import translationsRU from './ru/translation.json'
+import translationsEN from './en/translation.json';
+import translationsRU from './ru/translation.json';
+import translationsCH from './ch/translation.json';
 
 const resources = {
   en: {
@@ -11,6 +12,9 @@ const resources = {
   },
   ru: {
     translation: translationsRU
+  },
+  ch: {
+    translation: translationsCH
   }
 };
 
@@ -21,8 +25,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'ru',
-    fallbackLng: "ru", // default language
+    fallbackLng: "en", // default language
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
