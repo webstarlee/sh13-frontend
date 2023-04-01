@@ -1,7 +1,6 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import types from "store/Profile/profileTypes";
-import { headerTypes } from "store/Header";
-import { headerAction } from "store/Header";
+import { headerTypes, headerAction } from "store/Header";
 import { changeFullname, changeUsername, changePassword } from "./profileApis";
 
 export function* changeFullnameSaga(data) {

@@ -5,6 +5,7 @@ import { headerSagas } from './Header';
 import { EmailSagas } from './Email';
 import { profileSagas } from "./Profile";
 import { usermanageSagas } from "./Usermanage";
+import { resourceSagas } from "./Resource";
 
 export default function* rootSaga() {
   yield all([
@@ -12,6 +13,7 @@ export default function* rootSaga() {
     call(headerSagas),
     call(EmailSagas),
     call(profileSagas),
-    call(usermanageSagas)
+    call(usermanageSagas),
+    call(resourceSagas),
   ]);
 }

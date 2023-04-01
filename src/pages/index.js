@@ -5,3 +5,4 @@ export { Profile } from "./Profile";
 export { Setting } from "./Setting";
 export { Usermanage } from "./Usermanage";
 export { Email } from "./Email";
+export { Gallery } from "./Gallery";

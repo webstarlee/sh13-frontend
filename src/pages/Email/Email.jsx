@@ -9,8 +9,8 @@ import {
   Tooltip
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   SHModal,
   SHDatePicker,
@@ -53,12 +53,12 @@ function ActionComponent(props) {
     <>
       <Tooltip title="Edit">
         <IconButton aria-label="edit" onClick={onEditClick} color="primary" size="small">
-          <ModeEditOutlineOutlinedIcon fontSize="inherit" />
+          <EditIcon fontSize="inherit" />
         </IconButton>
       </Tooltip>
       <Tooltip title="Delete">
         <IconButton aria-label="delete" onClick={onDeleteClick} color="error" size="small">
-          <DeleteOutlineOutlinedIcon fontSize="inherit" />
+          <DeleteIcon fontSize="inherit" />
         </IconButton>
       </Tooltip>
     </>

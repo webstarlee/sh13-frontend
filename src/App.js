@@ -43,12 +43,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <RouterProvider
-        router={router}
-        fallbackElement={
-          <div style={{ height: "100vh", width: "100%" }}>asdfasdf</div>
-        }
-      />
+      <RouterProvider router={router}/>
       <SHToast />
     </ThemeProvider>
   );

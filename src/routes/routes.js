@@ -1,6 +1,15 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { AuthLayout, DashboadLayout } from "layouts";
-import { Home, Login, Register, Profile, Email, Setting, Usermanage } from "pages";
+import {
+  Home,
+  Login,
+  Register,
+  Profile,
+  Email,
+  Setting,
+  Usermanage,
+  Gallery
+} from "pages";
 
 export const routes = createBrowserRouter([
   {
@@ -30,6 +39,10 @@ export const routes = createBrowserRouter([
       {
         path: "email",
         element: <Email />,
+      },
+      {
+        path: "gallery",
+        element: <Gallery />,
       },
     ],
   },

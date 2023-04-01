@@ -4,6 +4,7 @@ import {
   ImportContacts,
   Email
 } from "@mui/icons-material";
+import ImageIcon from '@mui/icons-material/Image';
 
 export const mainNavigation = [
   {
@@ -37,5 +38,10 @@ export const mainNavigation = [
     name: "Email Account",
     icon: Email,
     url: `/email`,
+  },
+  {
+    name: "Gallery",
+    icon: ImageIcon,
+    url: `/gallery`,
   },
 ];
